@@ -1,7 +1,46 @@
-#main.container
-    %div.row
-        %div.col.s12
-            %h1.title dexterity.io
-    %div.row
-        %div.col.s12
-            %p This view will display a list of projects.
+= render :partial => "shared/sidenav"
+%main.container
+    .row
+        .col.s12
+            %h2.title Projects
+    .row
+        .col.m12.l6
+            .card.small
+                .card-content.grey-text.text-darken-4
+                    %span.card-title First Project
+                    %p This is a project. It is a good project to work on.
+                    %p Last worked on: August 9th, 2017
+                .card-action
+                    %a{:href => "#", "data-turbolinks" => 'false'} Open
+                    %a{:href => "#", "data-turbolinks" => 'false'} Edit
+                    %a{:href => "#", "data-turbolinks" => 'false'} Delete
+        .col.m12.l6
+            .card.small
+                .card-content.grey-text.text-darken-4
+                    %span.card-title Second Project
+                    %p This is a project. It is a very, very bad project to work on.
+                    %p Last worked on: October 18th, 2017
+                .card-action
+                    %a{:href => "#", "data-turbolinks" => 'false'} Open
+                    %a{:href => "#", "data-turbolinks" => 'false'} Edit
+                    %a{:href => "#", "data-turbolinks" => 'false'} Delete
+        .col.m12.l6
+            .card.small
+                .card-content.grey-text.text-darken-4
+                    %span.card-title Third Project
+                    %p This is a project. It is a good project to work on.
+                    %p Last worked on: August 9th, 2017
+                .card-action
+                    %a{:href => "#", "data-turbolinks" => 'false'} Open
+                    %a{:href => "#", "data-turbolinks" => 'false'} Edit
+                    %a{:href => "#", "data-turbolinks" => 'false'} Delete
+        .col.m12.l6
+            .card.small
+                .card-content.grey-text.text-darken-4
+                    %span.card-title Fourth Project
+                    %p This is a project. It is a very, very bad project to work on.
+                    %p Last worked on: October 18th, 2017
+                .card-action
+                    %a{:href => "#", "data-turbolinks" => 'false'} Open
+                    %a{:href => "#", "data-turbolinks" => 'false'} Edit
+                    %a{:href => "#", "data-turbolinks" => 'false'} Delete
