@@ -5,21 +5,10 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-begin
-    require 'rubygems'
-    require 'cucumber'
-    require 'cucumber/rake/task'
-    
-    Cucumber::Rake::Task.new(:features) do |t|
-      t.cucumber_opts = "features --format pretty"
-    end
-rescue LoadError
-end
+require 'rspec/core/rake_task'
+require 'cucumber/rake/task'
 
-require 'rake/testtask'
+RSpec::Core::RakeTask.new
+Cucumber::Rake::Task.new
 
-begin
-  require 'rspec/core/rake_task'
-  RSpec::Core::RakeTask.new(:spec)
-rescue LoadError
-end
+task :default => [:spec, :cucumber]
