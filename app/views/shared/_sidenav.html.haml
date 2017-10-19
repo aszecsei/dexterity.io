@@ -1,40 +1,41 @@
-%ul#slide-out.side-nav.fixed
-    %li
-        %div.user-view
-            %div.background
-                =image_tag "office.jpg"
-            %a{:href => "#"}
-                =image_tag "profile/0.jpg", :class => 'profile-img circle'
-            %a{:href => "#"}
-                %span.white-text.name User Name
-            %a{:href => "#"}
-                %span.white-text.email username@gmail.com
-    %li
-        %a.subheader Projects
-    %li
-        %a{:href => '#!'} First Project
-    %li
-        %a{:href => '#!'} Second Project
-    %li
-        %div.divider
-    %li
-        %a.subheader My Issues
-    %li
-        %a{:href => "#!"} First Issue
-    %li
-        %a{:href => "#!"} Second Issue
-    %li
-        %a{:href => "#!"} Third Issue
-    %li
-        %div.divider
-    %li
-        %a.subheader Burndown
-    %li
-        %a{:href => "#!"} View Chart
-
-:coffeescript
-    document.addEventListener 'turbolinks:load', ->
-        $('.button-collapse').sideNav()
-        console.log 'hello!'
-        return
-= render :partial => "shared/navbar"
+%header
+    = render :partial => "shared/navbar"
+    %ul#nav-mobile.side-nav.fixed
+        %li
+            %div.user-view
+                %div.background
+                    =image_tag "office.jpg"
+                %a{:href => "#"}
+                    =image_tag "profile/0.jpg", :class => 'profile-img circle'
+                %a{:href => "#"}
+                    %span.white-text.name User Name
+                %a{:href => "#"}
+                    %span.white-text.email username@gmail.com
+        %li
+            %a.subheader Projects
+        %li
+            %a{:href => '#!'} First Project
+        %li
+            %a{:href => '#!'} Second Project
+        %li
+            %div.divider
+        %li
+            %a.subheader My Issues
+        %li
+            %a{:href => "#!"} First Issue
+        %li
+            %a{:href => "#!"} Second Issue
+        %li
+            %a{:href => "#!"} Third Issue
+        %li
+            %div.divider
+        %li
+            %a.subheader Burndown
+        %li
+            %a{:href => "#!"} View Chart
+    
+    :coffeescript
+        document.addEventListener 'turbolinks:load', ->
+            $('.button-collapse').sideNav()
+            console.log 'hello!'
+            return

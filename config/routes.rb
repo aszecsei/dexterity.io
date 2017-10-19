@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
-  get 'projects(/:id)', to: 'projects#show'
-  get 'projects/index'
+  get 'projects/:id', to: 'projects#show'
+  get 'projects', to: 'projects#index'
 
   get 'welcome/index'
   root 'welcome#index'
