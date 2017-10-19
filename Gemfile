@@ -32,7 +32,6 @@ gem 'materialize-sass'
 gem 'jquery-rails'
 # Use Haml as the templating library
 gem 'haml'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
