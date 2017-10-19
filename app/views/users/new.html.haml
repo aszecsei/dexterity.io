@@ -1,0 +1,24 @@
+
+.valign-wrapper.grey.lighten-4{:style=>"width:100%;height:100%;position: absolute;"}
+    .container    
+        .row
+            = form_tag users_path do
+                .col.s8.offset-s2
+                    .card.white.darken-1
+                        .card-content
+                            %span.card-title
+                                Register
+                            %p
+                                .input-field
+                                    %input.validate{:type =>"email",:id => "email"}
+                                    %label{:for=>"email"}
+                                        Email   
+                                .input-field
+                                    %input.validate{:type =>"password",:id => "password"}
+                                    %label{:for=>"password"}
+                                        Password
+                        .card-action
+                            %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
+                                %span.orange-text
+                                    Register
+                                            
