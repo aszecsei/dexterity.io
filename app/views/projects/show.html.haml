@@ -1,0 +1,42 @@
+= render :partial => "shared/sidenav"
+%main.container
+    .row
+        .col.s12
+            %ul.tabs.tabs-fixed-width.z-depth-1
+                %li.tab
+                    %a{:href => "#desc"} Description
+                %li.tab
+                    %a{:href => "#myissues"} My Issues
+                %li.tab
+                    %a{:href => "#unassigned"} Unassigned Issues
+                %li.tab
+                    %a{:href => "#all"} All Issues
+        #desc.col.s12
+            %h4 Project Description
+            %p This is a project!
+            %p I don't like it.
+        #myissues.col.s12
+            %h4 My Issues
+            .collection
+                %a.collection-item{:href => "#!"} Eat food
+                %a.collection-item{:href => "#!"} Drink soda
+                %a.collection-item{:href => "#!"} Sleep a lot
+                %a.collection-item{:href => "#!"} Don't fear the reaper
+        #unassigned.col.s12
+            %h4 Unassigned Issues
+            .collection
+                %a.collection-item{:href => "#!"} Do a ton of work
+        #all.col.s12
+            %h4 All Issues
+            .collection
+                %a.collection-item{:href => "#!"} Eat food
+                %a.collection-item{:href => "#!"} Drink soda
+                %a.collection-item{:href => "#!"} Sleep a lot
+                %a.collection-item{:href => "#!"} Don't fear the reaper
+                %a.collection-item{:href => "#!"} Do a ton of work
+                %a.collection-item{:href => "#!"} Dance like nobody's watching
+
+:coffeescript
+    document.addEventListener 'turbolinks:load', ->
+            $('ul.tabs').tabs()
+            return
