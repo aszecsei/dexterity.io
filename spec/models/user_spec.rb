@@ -22,4 +22,21 @@ RSpec.describe User, type: :model do
     FactoryGirl.create(:user, email: 'test@test.com')
     FactoryGirl.build(:user, email: 'test@test.com').should_not be_valid
   end
+  
+  it "invalidates tokens" do
+    usr = FactoryGirl.create(:user, token: 'test')
+    expect(usr.token).to eq('test')
+    usr.invalidate_token
+    usr.reload
+    expect(usr.token).to eq(nil)
+  end
+  
+  it "validates successful logins" do
+    usr = FactoryGirl.create(:user)
+    expect(User.valid_login?(usr.username, usr.password)).to be_truthy
+  end
+  
+  it "validates unsuccessful logins" do
+    expect(User.valid_login?("test", "test")).to_not be_truthy
+  end
 end
