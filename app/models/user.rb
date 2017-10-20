@@ -13,4 +13,11 @@ class User < ApplicationRecord
             user
         end
     end
+    
+    validates_presence_of :username
+    validates_presence_of :email
+    validates_presence_of :displayName
+    
+    validates :username, uniqueness: true
+    validates :email, uniqueness: true
 end
