@@ -9,5 +9,8 @@ Rails.application.routes.draw do
   match '/login_create', to: 'sessions#create', via: :post
   resources :users
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  scope :format => true, :constraints => { :format => 'json' } do
+    post   "/api/login"       => "API::sessions#create"
+    delete "/api/logout"      => "API::sessions#destroy"
+  end
 end
