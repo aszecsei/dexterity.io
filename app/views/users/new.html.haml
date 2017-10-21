@@ -1,8 +1,10 @@
-
-.valign-wrapper.grey.lighten-4{:style=>"width:100%;height:100%;position: absolute;"}
+.container
+    .background-top.z-depth-1
+    .background-bottom
+.valign-wrapper
     .container    
         .row
-            = form_tag users_path do
+            = form_tag users_path, id: "formValidate", class: "left-alert"  do
                 .col.s8.offset-s2
                     .card.white.darken-1
                         .card-content
@@ -10,15 +12,58 @@
                                 Register
                             %p
                                 .input-field
-                                    %input.validate{:type =>"email",:id => "email"}
-                                    %label{:for=>"email"}
-                                        Email   
+                                    %input{:type =>"text",:id => "username",:name => "username","data-error"=>".errorTxt1", :required =>""}
+                                    %label{:for=>"username"}
+                                        Username 
+                                    .errorTxt1
                                 .input-field
-                                    %input.validate{:type =>"password",:id => "password"}
+                                    %input{:type =>"email",:id => "email", :name => "email", "data-error"=>".errorTxt2"}
+                                    %label{:for=>"email"}
+                                        Email
+                                    .errorTxt2
+                                .input-field
+                                    %input{:type =>"password",:id => "password",:name => "password","data-error"=>".errorTxt3"}
                                     %label{:for=>"password"}
                                         Password
+                                    .errorTxt3
+                                .input-field
+                                    %input{:type =>"password",:id => "confirmpassword",:name => "confirmpassword","data-error"=>".errorTxt4"}
+                                    %label{:for=>"confirmpassword"}
+                                        Confirm Password
+                                    .errorTxt4
                         .card-action
                             %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
                                 %span.orange-text
                                     Register
-                                            
+                                    
+:coffeescript
+    $( '#formValidate' ).validate
+        rules:
+            username:
+                required: true
+                minlength: 5
+            email:
+                required: true
+                email: true
+            password:
+                required: true
+                minlength: 5
+            confirmpassword:
+                required: true
+                minlength: 5
+                equalTo: '#password'
+        messages:
+            username:
+                minlength: "Enter at least 5 characters"
+            email:
+                email: "Enter a valid email"
+            confirmpassword:
+                equalTo: 'Passwords must match'                                                             
+        errorElement: 'div'
+        errorPlacement: (error, element) ->
+            placement = $(element).data('error')
+            if placement
+                $(placement).append error
+            else
+                error.insertAfter element
+            return
