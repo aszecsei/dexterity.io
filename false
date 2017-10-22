@@ -1,0 +1,3 @@
+      invoke  active_record
+      remove    db/migrate/20171020153150_add_details_to_user_databases.rb
+      create    db/migrate/20171020153354_add_details_to_user_databases.rb
