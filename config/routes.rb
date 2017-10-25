@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   match '/login_create', to: 'sessions#create', via: :post
   resources :users
 
-  scope :format => true, :constraints => { :format => 'json' } do
-    post   "/api/login"       => "API::sessions#create"
-    delete "/api/logout"      => "API::sessions#destroy"
+  namespace :api, :format => true, :constraints => { :format => 'json' } do
+    post   "/api/login"       => "sessions#create"
+    delete "/api/logout"      => "sessions#destroy"
   end
 end
