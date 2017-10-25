@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   match '/login', to: 'sessions#new', via: :get
   match '/login', to: 'sessions#create', via: :post
   match '/register', to: 'users#new', via: :get
-  match '/register', to: 'users#create', via: :post
+  
+  
+  namespace :api, :format => true, :constraints => { :format => 'json' } do
+    # routes here
+    post '/login' => "sessions#create"
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
