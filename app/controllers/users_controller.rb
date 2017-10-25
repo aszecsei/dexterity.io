@@ -3,7 +3,6 @@ class UsersController < ApplicationController
     has_secure_token
     
     def new
-    # default: render 'new' template
     end
   
     def self.valid_login?(email, password)

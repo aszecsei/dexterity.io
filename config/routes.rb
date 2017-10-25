@@ -6,8 +6,14 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   match '/login', to: 'sessions#new', via: :get
-  match '/login_create', to: 'sessions#create', via: :post
-  resources :users
+  match '/login', to: 'sessions#create', via: :post
+  match '/register', to: 'users#new', via: :get
+  
+  
+  namespace :api, :format => true, :constraints => { :format => 'json' } do
+    # routes here
+    post '/login' => "sessions#create"
+  end
 
   namespace :api, :format => true, :constraints => { :format => 'json' } do
     post   "/api/login"       => "sessions#create"

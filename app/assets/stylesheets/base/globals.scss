@@ -7,7 +7,15 @@ header, main, footer {
         padding-left: 0;
     }
 }
+<<<<<<< HEAD
 
 .primary {
     color: $primary-color;
+=======
+div.error {
+  color: red;
+  margin-top: -15px;
+  padding: 0;
+  font-size: 0.8em;
+>>>>>>> e9fb9db7c1262819b93ebf167316af8890367973
 }

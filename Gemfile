@@ -34,6 +34,7 @@ gem 'jquery-rails'
 gem 'haml'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'jquery-validation-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,6 +50,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -66,4 +68,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :production do
   gem 'pg' # for Heroku deployment
   gem 'rails_12factor'
+end
+
+group :test do
+  gem 'faker'
 end
