@@ -39,4 +39,16 @@ RSpec.describe User, type: :model do
   it "validates unsuccessful logins" do
     expect(User.valid_login?("test", "test")).to_not be_truthy
   end
+  
+  it "validates successful tokens" do
+    usr = FactoryGirl.create(:user, token: 'test')
+    expect(User.valid_token?('test')).to be_truthy
+  end
+  
+  it "invalidates unsuccessful tokens" do
+    usr = FactoryGirl.create(:user, token: 'test')
+    expect(User.valid_token?('')).to be_falsey
+    expect(User.valid_token?(nil)).to be_falsey
+    expect(User.valid_token?('other')).to be_falsey
+  end
 end

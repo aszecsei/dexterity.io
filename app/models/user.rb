@@ -21,7 +21,7 @@ class User < ApplicationRecord
     validates :username, uniqueness: true
     validates :email, uniqueness: true
     
-    def valid_token?(token)
+    def self.valid_token?(token)
         if token.nil? or token.empty?
             return false
         end

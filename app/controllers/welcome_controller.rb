@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    if not session[:token].empty?
+    if not (session[:token].nil? or session[:token].empty?)
       redirect_to projects_url
     end
   end
