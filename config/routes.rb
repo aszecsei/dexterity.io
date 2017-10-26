@@ -9,11 +9,6 @@ Rails.application.routes.draw do
   match '/login', to: 'sessions#create', via: :post
   match '/register', to: 'users#new', via: :get
   
-  
-  namespace :api, :format => true, :constraints => { :format => 'json' } do
-    # routes here
-    post '/login' => "sessions#create"
-  end
 
   namespace :api, :format => true, :constraints => { :format => 'json' } do
     post   "/api/login"       => "sessions#create"
