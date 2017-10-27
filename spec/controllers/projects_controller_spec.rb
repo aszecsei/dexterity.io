@@ -12,7 +12,7 @@ describe ProjectsController do
         it 'should successfully retrieve the project page' do
             get :show, params: {id: '1'}
             expect(assigns(:title)).to eq('Project 1')
-            response.should render_template :show
+            expect(response).to render_template :show
         end
     end
 end

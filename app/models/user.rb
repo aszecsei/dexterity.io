@@ -20,4 +20,14 @@ class User < ApplicationRecord
     
     validates :username, uniqueness: true
     validates :email, uniqueness: true
+    
+    def self.valid_token?(token)
+        if token.nil? or token.empty?
+            return false
+        end
+        user = find_by(token: token)
+        if user
+            user
+        end
+    end
 end
