@@ -5,14 +5,19 @@ class API::SessionsController < API::ApiController
         if user = User.valid_login?(params[:email], params[:password])
             allow_token_to_be_used_only_once_for(user)
             send_auth_token_for_valid_login_of(user)
+            flash[:notice] = "Login successfully"
+            redirect_to root_url
         else
             render_unauthorized("Error with your login or password")
+            flash[:warning] = "Invalid email or password"
+            redirect_to login_url
         end
     end
 
     def destroy
         logout
         head :ok
+        flash[:notice] = "Logout successfully"
     end
 
     private

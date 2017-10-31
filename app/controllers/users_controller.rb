@@ -1,34 +1,20 @@
 class UsersController < ApplicationController
-    has_secure_password
-    has_secure_token
-    
+    def user_params
+        params.require(:user).permit(:email, :password)
+    end
+  
     def new
     end
   
-    def self.valid_login?(email, password)
-        user = find_by(email: email)
-        if user && user.authenticate(password)
-            user
+    def create
+        if User.find_by_user_email(user_params[:email]) != nil
+          flash[:warning] = "Sorry, this email is taken. Try again."
+          redirect_to new_user_path
+        else
+          @user = User.create_user!(user_params)
+          
+          flash[:notice] = "Welcome #{@user.user_id}. Your account has been created"
+          redirect_to login_path
         end
-    end
-    
-    def allow_token_to_be_used_only_once
-        regenerate_token
-        touch(:token_created_at)
-    end
-
-    def logout
-        invalidate_token
-    end
-
-    def with_unexpired_token(token, period)
-        where(token: token).where('token_created_at >= ?', period).first
-    end
-    
-    private
-    
-    def invalidate_token
-        update_columns(token: nil)
-        touch(:token_created_at)
     end
 end
