@@ -1,4 +1,4 @@
-class API::ApiController < ActionController::API
+class Api::ApiController < ActionController::API
     def require_login
         authenticate_token || render_unauthorized("Access denied")
     end
@@ -19,13 +19,7 @@ class API::ApiController < ActionController::API
     def authenticate_token
         authenticate_with_http_token do |token, options|
             # Compare the tokens in a time-constant manner, to mitigate timing attacks
-            if user = User.find_by(token: token)
-                ActiveSupport::SecurityUtils.secure_compare(
-                    ::Digest::SHA256.hexdigest(token),
-                    ::Digest::SHA256.hexdigest(user.token))
-                user
-            end
-            #User.find_by(token: token)
+            User.find_by(token: token)
         end
     end
 end

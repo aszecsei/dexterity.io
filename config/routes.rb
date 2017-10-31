@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   
   get 'projects/:id', to: 'projects#show'
   get 'projects', to: 'projects#index'
+  
+  get 'sessions/new'
 
   get 'welcome/index'
   root 'welcome#index'
@@ -10,8 +12,10 @@ Rails.application.routes.draw do
   match '/register', to: 'users#new', via: :get
   
 
-  namespace :api, :format => true, :constraints => { :format => 'json' } do
-    post   "/api/login"       => "sessions#create"
-    delete "/api/logout"      => "sessions#destroy"
+  namespace :api do
+    match '/login', to: 'sessions#new', via: :get
+    post   "/login"       => "sessions#create"
+    #delete "/logout"      => "sessions#destroy"
   end
+  #, :format => true, :constraints => { :format => 'json' }
 end

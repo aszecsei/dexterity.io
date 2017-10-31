@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'spec_helper'
 
-RSpec.describe SessionsController, type: :controller do
+RSpec.describe Api::SessionsController, type: :controller do
     
     describe 'POST #create' do
         it 'should detect invalid email' do
