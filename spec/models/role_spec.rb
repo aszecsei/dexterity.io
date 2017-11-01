@@ -6,7 +6,7 @@ RSpec.describe Role, type: :model do
     FactoryGirl.create(:project, name: 'John Doe')
   end
   it "has a valid factory" do
-    FactoryGirl.create(:role, project_id: 1).should be_valid
+    expect(FactoryGirl.create(:role, project_id: 1)).to be_valid
   end
   it "gets the name of the project correctly" do
     new_role = FactoryGirl.create(:role, project_id: 1)

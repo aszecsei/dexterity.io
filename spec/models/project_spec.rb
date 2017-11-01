@@ -3,10 +3,10 @@ require 'spec_helper'
 
 RSpec.describe Project, type: :model do
   it "has a valid factory" do
-    FactoryGirl.create(:project).should be_valid
+    expect(FactoryGirl.create(:project)).to be_valid
   end
   it "is invalid without a name" do
-    FactoryGirl.build(:project, name: nil).should_not be_valid
+    expect(FactoryGirl.build(:project, name: nil)).to_not be_valid
   end
   it "has access to multiple roles" do
     @project1 = FactoryGirl.create(:project)
