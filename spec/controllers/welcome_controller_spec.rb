@@ -5,7 +5,7 @@ describe WelcomeController do
     describe 'GET #index' do
        it 'should successfully retrieve the index page without token' do
            get :index
-           response.should render_template :index
+           expect(response).to render_template :index
        end
        it 'should redirect to projects page with token' do
            FactoryGirl.create(:user, token: 'beepboop')
