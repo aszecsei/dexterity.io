@@ -19,15 +19,15 @@ ActiveRecord::Schema.define(version: 20171030163752) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.integer "project_id"
-    t.boolean "add_issues"
-    t.boolean "close_issues"
-    t.boolean "assign_issues"
-    t.boolean "edit_project"
-    t.boolean "delete_project"
-    t.boolean "add_project_members"
-    t.boolean "remove_project_members"
+    t.string "name", null: false
+    t.integer "project_id", null: false
+    t.boolean "add_issues", default: false
+    t.boolean "close_issues", default: false
+    t.boolean "assign_issues", default: false
+    t.boolean "edit_project", default: false
+    t.boolean "delete_project", default: false
+    t.boolean "add_project_members", default: false
+    t.boolean "remove_project_members", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_roles_on_project_id"
