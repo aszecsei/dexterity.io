@@ -9,8 +9,7 @@
             .row.center
                 %h4.header.col.s12.white-text.light
                     A better way to manage your projects.
-                %a.header.btn-large.orange
-                    Get Started!
+                = link_to "Get Started!", login_path, :id => "get-started-btn", :class => 'header btn-large orange'
     .parallax
         =image_tag("office.jpg")
         
