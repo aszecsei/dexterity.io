@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
             # Save the user ID in the session so it can be used in
             # subsequent requests
             session[:token] = params[:token]
+            #flash[:notice] = "Login successfully"
             redirect_to root_url
         else
             flash[:error] = 'Access denied'

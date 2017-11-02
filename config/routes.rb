@@ -8,11 +8,10 @@ Rails.application.routes.draw do
   post '/login'     => 'sessions#create'
   get  '/register'  => 'users#new'
   
-  
-  namespace :api, :format => true, :constraints => { :format => 'json' } do
-    # routes here
-    post '/login' => "sessions#create"
-  end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api do
+    post   "/login"       => "sessions#create"
+    delete "/logout"      => "sessions#destroy"
+  end
+  #, :format => true, :constraints => { :format => 'json' }
 end
