@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030163752) do
+ActiveRecord::Schema.define(version: 20171102145616) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 20171030163752) do
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "workingons", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "user_id"
+    t.integer "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_workingons_on_project_id"
+    t.index ["role_id"], name: "index_workingons_on_role_id"
+    t.index ["user_id"], name: "index_workingons_on_user_id"
   end
 
 end
