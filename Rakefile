@@ -5,12 +5,16 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-if Rails.env.development? or Rails.env.test?
-    require 'rspec/core/rake_task'
-    require 'cucumber/rake/task'
-    
-    RSpec::Core::RakeTask.new
-    Cucumber::Rake::Task.new
-    
-    task :default => [:spec, :cucumber]
+desc "Start the server"
+task "server", [:port] do |t, args|
+    default_port = "$PORT"
+    host = "$IP"
+
+    port_arg = args.port
+    port = port_arg ? port_arg : default_port
+
+    puts "Start server: http://#{host}:#{port}/"
+    start_server_cmd = "rails server -p #{port} -b #{host}"
+
+    sh start_server_cmd
 end
