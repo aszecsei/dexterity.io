@@ -1,7 +1,10 @@
-
+#sidenav-overlay{
+   z-index: 0 
+}
+  
 .side-nav{
  width: 200px;
- top: 64px;
+ top: 60px;
  z-index: 1;
  position: relative;
 }
