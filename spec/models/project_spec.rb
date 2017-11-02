@@ -15,4 +15,15 @@ RSpec.describe Project, type: :model do
     expect(@project1.roles[0].name).to eq('Scrum Master')
     expect(@project1.roles[1].name).to eq('Project Owner')
   end
+  
+  it "has access to multiple users" do
+    project1 = FactoryGirl.create(:project)
+    FactoryGirl.create(:user, username: 'Liam')
+    FactoryGirl.create(:user, username: 'Adam')
+    FactoryGirl.create(:role, name: 'Developer', project_id: 1)
+    FactoryGirl.create(:workingon, project_id: 1, user_id: 1, role_id: 1)
+    FactoryGirl.create(:workingon, project_id: 1, user_id: 2, role_id: 1)
+    expect(project1.users[0].username).to eq('Liam')
+    expect(project1.users[1].username).to eq('Adam')
+  end
 end
