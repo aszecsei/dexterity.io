@@ -9,6 +9,7 @@ class ProjectsController
     return
 
   index: ->
+    $("#projects-row").append(generateProjectCard("Dynamic Project #{num}", "<p>Description for project #{num}</p><p>Last worked on: Never.</p>", "#", "#", "#")) for num in [1..10]
     $('.modal').modal()
     $( '#formValidate' ).validate
       rules:

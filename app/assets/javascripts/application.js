@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require materialize-sprockets
 //= require jquery.validate
+//= require generators
 //= require dexterityio
 //= require_tree .
 
