@@ -1,6 +1,10 @@
 class User < ApplicationRecord
     has_secure_password
     has_secure_token
+    
+    has_many :workingons
+    has_many :projects, :through => :workingons
+    has_many :roles, :through => :workingons
 
     # This method is not available in has_secure_token
     def invalidate_token
