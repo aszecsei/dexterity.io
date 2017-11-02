@@ -51,6 +51,7 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   gem 'factory_girl_rails'
+  gem 'teaspoon-mocha'
 end
 
 group :development do
@@ -72,4 +73,5 @@ end
 
 group :test do
   gem 'faker'
+  gem 'phantomjs'
 end
