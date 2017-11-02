@@ -2,34 +2,21 @@ class Api::SessionsController < Api::ApiController
     skip_before_action :require_login, only: [:create], raise: false
 
     def create
-        if user = User.valid_login?(params[:email], params[:password])
-            allow_token_to_be_used_only_once_for(user)
-            send_auth_token_for_valid_login_of(user)
-            redirect_to login_url
+        if User.valid_login?(params[:username], params[:password])
+            user = User.find_by_username(params[:username])
+            user.regenerate_token
+            render json: {:token => user.token}
         else
-            render_unauthorized("Error with your login or password")
-            flash[:warning] = "Invalid email or password"
-            redirect_to login_url
+            render_unauthorized("Invalid username or password")
         end
     end
 
     def destroy
-        logout
-        head :ok
-        flash[:notice] = "Logout successfully"
-    end
-
-    private
-
-    def send_auth_token_for_valid_login_of(user)
-        render json: { token: user.token }
-    end
-
-    def allow_token_to_be_used_only_once_for(user)
-        user.regenerate_token
-    end
-
-    def logout
-        current_user.invalidate_token
+        if current_user.nil?
+           render_unauthorized("No user is currently logged in.") 
+        else
+            current_user.invalidate_token
+            head :no_content
+        end
     end
 end

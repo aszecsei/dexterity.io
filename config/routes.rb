@@ -12,9 +12,8 @@ Rails.application.routes.draw do
   
 
   namespace :api do
-    match '/login', to: 'sessions#new', via: :get
     post   "/login"       => "sessions#create"
-    #delete "/logout"      => "sessions#destroy"
+    delete "/logout"      => "sessions#destroy"
   end
   #, :format => true, :constraints => { :format => 'json' }
 end

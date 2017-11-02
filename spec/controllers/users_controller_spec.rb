@@ -4,5 +4,10 @@ require 'rails_helper'
 #and checking if sending a request with the wrong username/password fails properly
 
 RSpec.describe UsersController, type: :controller do
-
+  describe "GET #new" do
+    it 'should successfully retrieve the register page' do
+      get :new
+      expect(response). to render_template :new
+    end
+  end
 end

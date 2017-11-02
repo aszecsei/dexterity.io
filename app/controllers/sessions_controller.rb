@@ -8,14 +8,10 @@ class SessionsController < ApplicationController
             # subsequent requests
             session[:token] = params[:token]
             #flash[:notice] = "Login successfully"
-            redirect_to projects_url
+            redirect_to root_url
         else
             flash[:error] = 'Access denied'
-            redirect_to welcome_url
+            redirect_to login_url
         end
-    end
-    
-    def index
-        redirect_to login_url
     end
 end
