@@ -13,10 +13,10 @@ RSpec.describe Role, type: :model do
     expect(new_role.project.name).to eq('John Doe')
   end
   it "is invalid without a name" do
-    FactoryGirl.build(:role, project_id: 1, name: nil).should_not be_valid
+    expect(FactoryGirl.build(:role, project_id: 1, name: nil)).to_not be_valid
   end
   it "is invalid without a project_id" do
-    FactoryGirl.build(:role, project_id: nil).should_not be_valid
+    expect(FactoryGirl.build(:role, project_id: nil)).to_not be_valid
   end
   it "should have permissions default to false" do
     new_role1 = FactoryGirl.create(:role, project_id: 1)

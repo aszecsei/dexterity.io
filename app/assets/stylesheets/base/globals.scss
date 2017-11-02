@@ -1,11 +1,24 @@
-header, main, footer {
-    padding-left: 300px;
+#sidenav-overlay{
+   z-index: 0 
 }
 
+.side-nav{
+ width: 200px;
+ top: 60px;
+ z-index: 1;
+ position: relative;
+}
 @media only screen and (max-width : 992px) {
     header, main, footer {
         padding-left: 0;
     }
+}
+footer{
+    height: 75px;
+    padding-left: 200px;
+}
+header{
+    z-index: 2;
 }
 div.error {
   color: red;
@@ -16,6 +29,7 @@ div.error {
 .page-footer{
     margin-top: 0px;
     padding-left: 0px;
+    
 }
 body {
   display: flex;
@@ -25,4 +39,5 @@ body {
 
 main {
   flex: 1 0 auto;
+  padding-left: 150px
 }
