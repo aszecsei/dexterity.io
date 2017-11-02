@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   
   get 'projects/:id', to: 'projects#show'
   get 'projects', to: 'projects#index'
-  
-  get 'sessions/new'
 
   get  '/login'     => 'sessions#new'
   post '/login'     => 'sessions#create'
