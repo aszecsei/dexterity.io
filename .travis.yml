@@ -4,3 +4,4 @@ rvm:
 
 before_script:
   - bundle exec rake db:migrate
+  - npm install -g istanbul
