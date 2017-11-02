@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
+  root :to => 'welcome#index'
   
   get 'projects/:id', to: 'projects#show'
   get 'projects', to: 'projects#index'
   
   get 'sessions/new'
 
-  get 'welcome/index'
-  root 'welcome#index'
-  match '/login', to: 'sessions#new', via: :get
-  match '/login', to: 'sessions#create', via: :post
-  match '/register', to: 'users#new', via: :get
+  get  '/login'     => 'sessions#new'
+  post '/login'     => 'sessions#create'
+  get  '/register'  => 'users#new'
   
 
   namespace :api do

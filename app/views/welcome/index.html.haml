@@ -1,16 +1,18 @@
 .parallax-container
     .section.no-pad-bot
         .container  
-            %br %br %br
+            %br 
+            %br 
+            %br
             %h1.header.center.blue-text.text-lighten-2.light
                 Dexterity.io
             .row.center
                 %h4.header.col.s12.white-text.light
                     A better way to manage your projects.
-                %a.header.btn-large.orange
-                    Get Started!
+                = link_to "Get Started!", login_path, :id => "get-started-btn", :class => 'header btn-large orange'
     .parallax
-        =image_tag("codingstock1.png")
+        =image_tag("office.jpg")
+        
 .container
     .section
         .row
@@ -38,8 +40,7 @@
                         
 .parallax-container
     .parallax
-        =image_tag("office.jpg")
-        
+        =image_tag("codingstock1.png")
 .container
     .section
         .row
@@ -50,7 +51,3 @@
                         and teamwork. It is designed to both be a simple and cost-effecive 
                         tool with powerful features for the aspiring start-up. Click above 
                         to get started.
-:coffeescript
-    $(document).ready ->
-        $('.parallax').parallax()
-        return

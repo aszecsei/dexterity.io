@@ -1,6 +1,6 @@
 = render :partial => "shared/sidenav"
 %main.container
-    .row
+    .row#projects-row
         .col.m12.l6
             .card.small
                 .card-content.grey-text.text-darken-4
@@ -41,3 +41,27 @@
                     %a{:href => "#", "data-turbolinks" => 'false'} Open
                     %a{:href => "#", "data-turbolinks" => 'false'} Edit
                     %a{:href => "#", "data-turbolinks" => 'false'} Delete
+    .fixed-action-btn{:style => "bottom: 50px; right: 19px;"}
+        %a.btn-floating.btn-large.modal-trigger{:href =>"#addModal"}
+            %i.material-icons 
+                add
+
+%form{:id =>"#add"}    
+    .modal#addModal
+        .modal-content
+            %h4 
+                Add New Project
+            .input-field
+                %input{:type =>"text",:id => "title",:name => "title","data-error"=>".errorTxt1", :required =>""}
+                %label{:for=>"title"}
+                    Title 
+                .errorTxt1
+            .input-field
+                %textarea.materialize-textarea{:id => "description", :name => "description", "data-error"=>".errorTxt2"}
+                %label{:for=>"description"}
+                    Description
+                .errorTxt2
+        .modal-footer
+            %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
+                %span.orange-text
+                    Submit

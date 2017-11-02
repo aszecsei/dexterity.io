@@ -3,7 +3,7 @@
     .background-bottom
 .valign-wrapper
     .container  
-        = form_tag api_login_path, id: "formLogin" do
+        = form_tag login_path, id: "formLogin" do
             .row
                 .col.s8.offset-s2
                     .card.white.darken-1
@@ -12,38 +12,20 @@
                                 Login
                             %p
                                 .input-field
-                                    %input{:type =>"email",:id => "email"}
+                                    %input.validate{:type =>"email",:id => "email"}
                                     %label{:for=>"email"}
                                         Email   
                                 .input-field
-                                    %input{:type =>"password",:id => "password"}
+                                    %input.validate{:type =>"password",:id => "password"}
                                     %label{:for=>"password"}
                                         Password
                         .card-action
                             
-                            %button.waves-effect.waves-orange.btn-flat
+                            %button.waves-effect.waves-teal.btn-flat
                                 %span.orange-text
                                     Login
-                            %button.waves-effect.waves-orange.btn-flat{:id =>"toggle-button",:type =>"button"}
-                                %span.orange-text
-                                    Register
-:coffeescript
-    $( '#formLogin' ).validate
-        rules:
-            email:
-                required: true
-                email: true
-            password:
-                required: true
-                minlength: 5
-        messages:
-            email:
-                email: "Enter a valid email"
-        errorElement: 'div'
-        errorPlacement: (error, element) ->
-            placement = $(element).data('error')
-            if placement
-                $(placement).append error
-            else
-                error.insertAfter element
-            return
+                            %a{:href =>"/register"}
+                                %button.waves-effect.waves-teal.btn-flat
+                                    %span.orange-text
+                                        Register
+                
