@@ -6,7 +6,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
-  %body
+  %body{:data => {:controller => controller.controller_path, :action => controller.action_name}}
     = yield
   %footer.page-footer
     = render('layouts/footer.html.haml')

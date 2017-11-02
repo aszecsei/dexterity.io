@@ -1,6 +1,6 @@
 = render :partial => "shared/sidenav"
 %main.container
-    .row
+    .row#projects-row
         .col.m12.l6
             .card.small
                 .card-content.grey-text.text-darken-4
@@ -65,29 +65,3 @@
             %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
                 %span.orange-text
                     Submit
-
-:coffeescript
-    $(document).ready ->
-        $('.modal').modal()
-        return
-    $( '#formValidate' ).validate
-        rules:
-            title:
-                required: true
-                minlength: 5
-            description:
-                required: true
-                email: true
-        messages:
-            title:
-                minlength: "Enter at least 5 characters"
-            description:
-                email: "Enter a description"
-        errorElement: 'div'
-        errorPlacement: (error, element) ->
-            placement = $(element).data('error')
-            if placement
-                $(placement).append error
-            else
-                error.insertAfter element
-            return

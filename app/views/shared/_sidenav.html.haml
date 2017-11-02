@@ -35,6 +35,6 @@
             %a{:href => "#!"} View Chart
     
     :coffeescript
-        document.addEventListener 'turbolinks:load', ->
+        $(document).on 'turbolinks:load', ->
             $('.button-collapse').sideNav()
             return
