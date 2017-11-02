@@ -1,7 +1,7 @@
 #sidenav-overlay{
    z-index: 0 
 }
-  
+
 .side-nav{
  width: 200px;
  top: 60px;
@@ -12,6 +12,10 @@
     header, main, footer {
         padding-left: 0;
     }
+}
+footer{
+    height: 75px;
+    padding-left: 200px;
 }
 header{
     z-index: 2;
