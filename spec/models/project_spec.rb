@@ -26,4 +26,12 @@ RSpec.describe Project, type: :model do
     expect(project1.users[0].username).to eq('Liam')
     expect(project1.users[1].username).to eq('Adam')
   end
+  
+  it "can create owners correctly" do
+    proj = FactoryGirl.create(:project)
+    owner = FactoryGirl.create(:user)
+    proj.create_owner(owner)
+    proj.reload
+    expect(proj.users[0].username).to eq(owner.username)
+  end
 end
