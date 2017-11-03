@@ -45,7 +45,7 @@ class UsersController
                 '<input type="hidden" name="token" value="' + data.token + '">' +
                 '</form>').submit();
             return
-          failure: (data) ->
+          error: (data) ->
             $("#errorMsg").text(data.message)
       e.preventDefault()
       return

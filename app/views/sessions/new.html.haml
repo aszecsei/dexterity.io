@@ -2,7 +2,7 @@
     .background-top.z-depth-1
     .background-bottom
 .valign-wrapper
-    .container  
+    .container
         = form_tag login_path, id: "formLogin" do
             .row
                 .col.s8.offset-s2
@@ -12,11 +12,11 @@
                                 Login
                             %p
                                 .input-field
-                                    %input.validate{:type =>"email",:id => "email"}
-                                    %label{:for=>"email"}
-                                        Email   
+                                    %input{:type =>"text",:id => "username",:name => "username"}
+                                    %label{:for=>"username"}
+                                        Username   
                                 .input-field
-                                    %input.validate{:type =>"password",:id => "password"}
+                                    %input{:type =>"password",:id => "password",:name => "password"}
                                     %label{:for=>"password"}
                                         Password
                         .card-action
@@ -28,4 +28,6 @@
                                 %button.waves-effect.waves-teal.btn-flat
                                     %span.orange-text
                                         Register
+        = form_tag login_path, id: "formSession" do
+            = hidden_field_tag 'token', ''
                 
