@@ -17,7 +17,7 @@ RSpec.describe Api::ProjectsController, type: :controller do
     
     it 'should require a name' do
       usr = api_login
-      post :create
+      post :create, params: {description: 'A project'}
       expect(response).to have_http_status(:unprocessable_entity)
     end
     
