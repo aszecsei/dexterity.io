@@ -12,8 +12,12 @@ class Api::ApiController < ActionController::API
     protected
 
     def render_unauthorized(message)
+        render_error(:unauthorized, message)
+    end
+    
+    def render_error(status, message)
         errors = { errors: [ { detail: message } ] }
-        render json: errors, status: :unauthorized
+        render json: errors, status: status
     end
 
     private
