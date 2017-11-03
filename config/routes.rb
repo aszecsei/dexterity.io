@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   namespace :api do
     post   "/login"       => "sessions#create"
     delete "/logout"      => "sessions#destroy"
+    post   "/register"    => "users#create"
   end
   #, :format => true, :constraints => { :format => 'json' }
 end
