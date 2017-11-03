@@ -9,21 +9,18 @@ class ProjectsController
     return
 
   index: ->
-    $("#projects-row").append(generateProjectCard("Dynamic Project #{num}", "<p>Description for project #{num}</p><p>Last worked on: Never.</p>", "#", "#", "#")) for num in [1..10]
+    # $("#projects-row").append(generateProjectCard("Dynamic Project #{num}", "<p>Description for project #{num}</p><p>Last worked on: Never.</p>", "#", "#", "#")) for num in [1..10]
     $('.modal').modal()
-    $( '#formValidate' ).validate
+    $( '#add' ).validate
       rules:
         title:
           required: true
           minlength: 5
         description:
           required: true
-          email: true
       messages:
         title:
           minlength: "Enter at least 5 characters"
-        description:
-          email: "Enter a description"
       errorElement: 'div'
       errorPlacement: (error, element) ->
         placement = $(element).data('error')
@@ -32,6 +29,28 @@ class ProjectsController
         else
           error.insertAfter element
         return
+    $("#add").submit (e) ->
+      console.log("Boo!")
+      url = "/api/projects"
+      $.ajax
+        type: 'POST'
+        headers: {"Authorization": "Token token=" + $("#token").val()}
+        url: url
+        data: $("#add").serialize()
+        success: (data) ->
+          $("#projects-row").append(generateProjectCard(data.name, data.description, '#', '#', '#'))
+          return
+        error: (req, msg, stat) ->
+          console.log(req)
+          response = JSON.parse(req.responseText)
+          errorsArr = (msg.detail for msg in response.errors)
+          errorsHTML = errorsArr.join("\n")
+          alert(errorsHTML)
+          # $("#errorMsg").html(errorsHTML)
+          return
+      e.preventDefault()
+      $("#addModal").modal('close');
+      return
     return
 
 this.app.projects = new ProjectsController

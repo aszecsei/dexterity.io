@@ -8,9 +8,11 @@
                 %a{:href => "#"}
                     =image_tag "profile/0.jpg", :class => 'profile-img circle'
                 %a{:href => "#"}
-                    %span.white-text.name User Name
+                    %span.white-text.name
+                        = @current_user.displayName + " (" + @current_user.username + ")"
                 %a{:href => "#"}
-                    %span.white-text.email username@gmail.com
+                    %span.white-text.email
+                        = @current_user.email
         %li
             %a.subheader Projects
         %li
