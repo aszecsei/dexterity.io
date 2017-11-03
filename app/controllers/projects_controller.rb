@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :require_login, raise: false
+  
   def index
     @title = "Projects"
   end

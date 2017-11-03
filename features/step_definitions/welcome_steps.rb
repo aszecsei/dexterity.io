@@ -18,7 +18,7 @@ When(/^I click the 'Get Started' button$/) do
 end
 
 Then(/^I should be taken to the login page$/) do
-  expect(page).to have_field("email")
+  expect(page).to have_field("username")
   expect(page).to have_field("password")
   expect(page).to have_content("Login")
 end

@@ -1,22 +1,22 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
-  protected
-  
   def require_login
-      authenticate_token || render_unauthorized("Access denied")
+      authenticate_token || handle_unauthorized
   end
 
   def current_user
       @current_user ||= authenticate_token
   end
+  
+  def handle_unauthorized
+    flash[:error] = 'Access denied'
+    redirect_to login_url
+  end
     
   private
   
   def authenticate_token
-      authenticate_with_http_token do |token, options|
-          # Compare the tokens in a time-constant manner, to mitigate timing attacks
-          User.find_by(token: token)
-      end
+    User.valid_token?(session[:token])
   end
 end
