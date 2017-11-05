@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 class UsersController
   new: ->
-    $( '#formValidate' ).validate
+    $( '#formRegister' ).validate
       rules:
         username:
           required: true
@@ -11,6 +11,8 @@ class UsersController
         email:
           required: true
           email: true
+        displayName:
+          required:true
         password:
           required: true
           minlength: 5
@@ -33,20 +35,20 @@ class UsersController
         else
           error.insertAfter element
         return
-    $('#formValidate').submit (e) ->
+    $('#formRegister').submit (e) ->
       url = '/api/register'
+      
+      
       $.ajax
         type: 'POST'
         url: url
-        data: $('#formValidate').serialize()
-          success: (data) ->
-            $("#see_comments").click ->
-              $('<form action="/login" method="POST">' + 
-                '<input type="hidden" name="token" value="' + data.token + '">' +
-                '</form>').submit();
-            return
-          error: (data) ->
-            $("#errorMsg").text(data.message)
+        data:  $("#formRegister").serialize()
+        success: (data) ->
+          location.href = "/login"
+          return
+        error: (data) ->
+          $("#errorMsg").text(data.error)
+          alert(data.error);
       e.preventDefault()
       return
     return

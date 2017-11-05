@@ -39,6 +39,7 @@ class ProjectsController
         data: $("#add").serialize()
         success: (data) ->
           $("#projects-row").append(generateProjectCard(data.name, data.description, '#', '#', '#'))
+          $("#addModal").modal('close');
           return
         error: (req, msg, stat) ->
           console.log(req)
@@ -49,7 +50,7 @@ class ProjectsController
           # $("#errorMsg").html(errorsHTML)
           return
       e.preventDefault()
-      $("#addModal").modal('close');
+      
       return
     return
 
