@@ -19,7 +19,7 @@
 //= require dexterityio
 //= require_tree .
 
-$(function() {
+document.addEventListener('turbolinks:load', function() {
   var $body = $("body")
   var controller = $body.data("controller").replace(/\//g, "_");
   var action = $body.data("action");

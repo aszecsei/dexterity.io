@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 class UsersController
   new: ->
+    console.log "Hello!"
     $( '#formRegister' ).validate
       rules:
         username:
@@ -37,8 +38,6 @@ class UsersController
         return
     $('#formRegister').submit (e) ->
       url = '/api/register'
-      
-      
       $.ajax
         type: 'POST'
         url: url
