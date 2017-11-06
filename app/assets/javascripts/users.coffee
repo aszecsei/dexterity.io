@@ -44,8 +44,8 @@ class UsersController
         url: url
         data:  $("#formRegister").serialize()
         success: (data) ->
-          location.href = "/login"
-          return
+          $("#token").val(data.token)
+          $("#formSession").submit();
         error: (data) ->
           $("#errorMsg").text(data.error)
           alert(data.error);
