@@ -11,7 +11,7 @@ class Api::ProjectsController < Api::ApiController
       proj.create_owner(current_user)
       render json: {:name => proj.name, :description => proj.description}
     else
-      render_error("Could not create project", :unprocessable_entity)
+      render_error(:unprocessable_entity, "Could not create project")
     end
   end
   
