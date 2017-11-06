@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 class UsersController
   new: ->
-    console.log "Hello!"
     $( '#formRegister' ).validate
       rules:
         username:
