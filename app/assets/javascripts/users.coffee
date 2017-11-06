@@ -37,8 +37,6 @@ class UsersController
         return
     $('#formRegister').submit (e) ->
       url = '/api/register'
-      
-      
       $.ajax
         type: 'POST'
         url: url
