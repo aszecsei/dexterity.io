@@ -4,6 +4,13 @@
 
 class SessionsController
   new: ->
+    $( '#formLogin' ).validate
+      rules:
+        username:
+          required: true
+        password:
+          required: true
+
     $("#formLogin").submit (e) ->
       console.log("Boo!")
       url = "/api/login"

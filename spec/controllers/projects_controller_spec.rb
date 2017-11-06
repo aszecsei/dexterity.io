@@ -20,8 +20,10 @@ describe ProjectsController do
         it 'should successfully retrieve the project page' do
             usr = FactoryGirl.create(:user, token: 'beepboop')
             session[:token] = 'beepboop'
-            get :show, params: {id: '1'}
-            expect(assigns(:title)).to eq('Project 1')
+            proj = FactoryGirl.create(:project)
+            proj.create_owner(usr)
+            get :show, params: {id: proj.id}
+            expect(assigns(:title)).to eq("Project #{proj.id}")
             expect(response).to render_template :show
         end
         

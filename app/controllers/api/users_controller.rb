@@ -5,7 +5,11 @@ class Api::UsersController < Api::ApiController
   end
   
   def create
-    usr = User.new(user_params)
+
+    user_params[:displayName] =user_params[:username]
+    p user_params
+    
+    p usr = User.new(user_params)
     if usr.save
       usr.regenerate_token
       render json: {:token => usr.token}

@@ -1,58 +1,30 @@
 = render :partial => "shared/sidenav"
 %main.container
     .row#projects-row
-        .col.m12.l6
-            .card.small
-                .card-content.grey-text.text-darken-4
-                    %span.card-title First Project
-                    %p This is a project. It is a good project to work on.
-                    %p Last worked on: August 9th, 2017
-                .card-action
-                    %a{:href => "#", "data-turbolinks" => 'false'} Open
-                    %a{:href => "#", "data-turbolinks" => 'false'} Edit
-                    %a{:href => "#", "data-turbolinks" => 'false'} Delete
-        .col.m12.l6
-            .card.small
-                .card-content.grey-text.text-darken-4
-                    %span.card-title Second Project
-                    %p This is a project. It is a very, very bad project to work on.
-                    %p Last worked on: October 18th, 2017
-                .card-action
-                    %a{:href => "#", "data-turbolinks" => 'false'} Open
-                    %a{:href => "#", "data-turbolinks" => 'false'} Edit
-                    %a{:href => "#", "data-turbolinks" => 'false'} Delete
-        .col.m12.l6
-            .card.small
-                .card-content.grey-text.text-darken-4
-                    %span.card-title Third Project
-                    %p This is a project. It is a good project to work on.
-                    %p Last worked on: August 9th, 2017
-                .card-action
-                    %a{:href => "#", "data-turbolinks" => 'false'} Open
-                    %a{:href => "#", "data-turbolinks" => 'false'} Edit
-                    %a{:href => "#", "data-turbolinks" => 'false'} Delete
-        .col.m12.l6
-            .card.small
-                .card-content.grey-text.text-darken-4
-                    %span.card-title Fourth Project
-                    %p This is a project. It is a very, very bad project to work on.
-                    %p Last worked on: October 18th, 2017
-                .card-action
-                    %a{:href => "#", "data-turbolinks" => 'false'} Open
-                    %a{:href => "#", "data-turbolinks" => 'false'} Edit
-                    %a{:href => "#", "data-turbolinks" => 'false'} Delete
+        - @projects.each do |proj|
+            .col.m12.l6
+                .card.small
+                    .card-content.grey-text.text-darken-4
+                        %span.card-title
+                            = proj.name
+                        %p
+                            = proj.description
+                    .card-action
+                        %a{:href => "#", "data-turbolinks" => 'false'} Open
+                        %a{:href => "#", "data-turbolinks" => 'false'} Edit
+                        %a{:href => "#", "data-turbolinks" => 'false'} Delete
     .fixed-action-btn{:style => "bottom: 50px; right: 19px;"}
         %a.btn-floating.btn-large.modal-trigger{:href =>"#addModal"}
             %i.material-icons 
                 add
 
-%form{:id =>"#add"}    
+= form_tag '#', id: "add" do 
     .modal#addModal
         .modal-content
             %h4 
                 Add New Project
             .input-field
-                %input{:type =>"text",:id => "title",:name => "title","data-error"=>".errorTxt1", :required =>""}
+                %input{:type =>"text",:id => "name",:name => "name","data-error"=>".errorTxt1", :required =>""}
                 %label{:for=>"title"}
                     Title 
                 .errorTxt1
@@ -65,3 +37,4 @@
             %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
                 %span.orange-text
                     Submit
+    = hidden_field_tag 'token', @current_user.token
