@@ -5,12 +5,34 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-if Rails.env.development? or Rails.env.test?
-    require 'rspec/core/rake_task'
-    require 'cucumber/rake/task'
-    
-    RSpec::Core::RakeTask.new
-    Cucumber::Rake::Task.new
-    
-    task :default => [:spec, :cucumber]
+begin
+  require 'cucumber'
+  require 'cucumber/rake/task'
+
+  Cucumber::Rake::Task.new(:features) do |t|
+    t.cucumber_opts = "--format pretty"
+  end
+
+  task :features => 'db:test:prepare'
+rescue LoadError
+  desc 'Cucumber rake task not available'
+  task :features do
+    abort 'Cucumber rake task is not available. Be sure to install cucumber as a gem or plugin'
+  end
+end
+
+task default: [:spec, :teaspoon, :features]
+
+desc "Start the server"
+task "server", [:port] do |t, args|
+    default_port = "$PORT"
+    host = "$IP"
+
+    port_arg = args.port
+    port = port_arg ? port_arg : default_port
+
+    puts "Start server: http://#{host}:#{port}/"
+    start_server_cmd = "rails server -p #{port} -b #{host}"
+
+    sh start_server_cmd
 end

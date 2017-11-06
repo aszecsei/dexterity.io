@@ -1,7 +1,53 @@
-#main.container
-    %div.row
-        %div.col.s12
-            %h1.title dexterity.io
-    %div.row
-        %div.col.s12
-            %p A smarter way to manage your projects.
+.parallax-container
+    .section.no-pad-bot
+        .container  
+            %br 
+            %br 
+            %br
+            %h1.header.center.blue-text.text-lighten-2.light
+                Dexterity.io
+            .row.center
+                %h4.header.col.s12.white-text.light
+                    A better way to manage your projects.
+                = link_to "Get Started!", login_path, :id => "get-started-btn", :class => 'header btn-large orange'
+    .parallax
+        =image_tag("office.jpg")
+        
+.container
+    .section
+        .row
+            .col.s12.m4
+                .icon-block
+                    .center.blue-text
+                        %i.large.material-icons
+                            assessment
+                    %h5.center
+                        Personalized Feedback
+            .col.s12.m4
+                .icon-block
+                    .center.blue-text
+                        %i.large.material-icons
+                            group
+                    %h5.center
+                        Team Focused
+            .col.s12.m4
+                .icon-block
+                    .center.blue-text
+                        %i.large.material-icons
+                            all_inclusive
+                    %h5.center
+                        Unlimited Possibilities
+                        
+.parallax-container
+    .parallax
+        =image_tag("codingstock1.png")
+.container
+    .section
+        .row
+            .col.s12.center
+                %h5
+                    %p.left-align
+                        Dexterity is a free agile tracking software focused on usablility
+                        and teamwork. It is designed to both be a simple and cost-effecive 
+                        tool with powerful features for the aspiring start-up. Click above 
+                        to get started.

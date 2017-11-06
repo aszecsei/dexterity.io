@@ -1,8 +1,20 @@
 Rails.application.routes.draw do
-  get 'projects/index'
+  root :to => 'welcome#index'
+  
+  get 'projects/:id', to: 'projects#show'
+  get 'projects', to: 'projects#index'
 
-  get 'welcome/index'
-  root 'welcome#index'
+  get  '/login'     => 'sessions#new'
+  post '/login'     => 'sessions#create'
+  get  '/register'  => 'users#new'
+  
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api do
+    post   "/login"       => "sessions#create"
+    delete "/logout"      => "sessions#destroy"
+    post   "/register"    => "users#create"
+    
+    post 'projects'       => "projects#create"
+  end
+  #, :format => true, :constraints => { :format => 'json' }
 end

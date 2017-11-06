@@ -1,0 +1,36 @@
+// Place all the styles related to the Sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "base/colors.scss";
+.valign-wrapper{
+    width:100%;height:100%;position: absolute; 
+
+}
+.background-top,.background-bottom{
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.background-top{
+    top: 0;
+    height: 50%;
+    background-color: #64b5f6;
+}
+.background-bottom{
+    bottom: 0;
+    height: 50%;
+    background-color: #F5F5F5;
+}
+.left-alert input[type=text] + label:after, 
+.left-alert input[type=password] + label:after, 
+.left-alert input[type=email] + label:after, 
+.left-alert input[type=url] + label:after, 
+.left-alert input[type=time] + label:after,
+.left-alert input[type=date] + label:after, 
+.left-alert input[type=datetime-local] + label:after, 
+.left-alert input[type=tel] + label:after, 
+.left-alert input[type=number] + label:after, 
+.left-alert input[type=search] + label:after, 
+.left-alert textarea.materialize-textarea + label:after{
+    left:0px;
+}
