@@ -1,0 +1,14 @@
+= render :partial => "shared/sidenav"
+%main.container
+    .row#swimlane-row
+        -@swimlane.each do |each|
+            .col.s8.m4.l2
+                %ul{id => "Swimlane" + @each.name}.connectedSortable
+                    -@each.getIssues.each do |issue|
+                    %li.ui-state-default
+                        .card.small
+                            .card-content.grey-text.text-darken-4
+                                 %span.card-title
+                                    = issue.name
+                                %p
+                                    = issue.description
