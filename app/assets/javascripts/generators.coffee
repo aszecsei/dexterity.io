@@ -14,3 +14,4 @@ this.generateProjectCard = (title, description, open, edit, mdelete) ->
     </div>
   </div>
   """
+this.generateIssueCard = {title,description, 
