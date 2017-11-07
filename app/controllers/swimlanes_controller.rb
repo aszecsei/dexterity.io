@@ -4,4 +4,3 @@ class SwimlanesController < ApplicationController
         @swimlane = 
     end
 end
-clas 
