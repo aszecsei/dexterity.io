@@ -10,15 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108032547) do
+ActiveRecord::Schema.define(version: 20171108032805) do
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "description"
-    t.integer "project_id"
+    t.integer "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_categories_on_project_id"
+  end
+
+  create_table "issues", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.integer "status_id", null: false
+    t.integer "category_id", null: false
+    t.integer "project_id", null: false
+    t.integer "assigned_to_id"
+    t.integer "created_by_id", null: false
+    t.integer "blocked_by_id"
+    t.string "estimated_time"
+    t.integer "story_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assigned_to_id"], name: "index_issues_on_assigned_to_id"
+    t.index ["blocked_by_id"], name: "index_issues_on_blocked_by_id"
+    t.index ["category_id"], name: "index_issues_on_category_id"
+    t.index ["created_by_id"], name: "index_issues_on_created_by_id"
+    t.index ["project_id"], name: "index_issues_on_project_id"
+    t.index ["status_id"], name: "index_issues_on_status_id"
   end
 
   create_table "projects", force: :cascade do |t|

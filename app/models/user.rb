@@ -5,6 +5,9 @@ class User < ApplicationRecord
     has_many :workingons
     has_many :projects, :through => :workingons
     has_many :roles, :through => :workingons
+    
+    has_many :assigned_issues, foreign_key: "assigned_to", class_name: "Issue"
+    has_many :created_issues, foreign_key: "created_by", class_name: "Issue"
 
     # This method is not available in has_secure_token
     def invalidate_token
