@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108032805) do
+ActiveRecord::Schema.define(version: 20171108175824) do
+
+  create_table "assignments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "issue_id"
+    t.index ["issue_id"], name: "index_assignments_on_issue_id"
+    t.index ["user_id", "issue_id"], name: "index_assignments_on_user_id_and_issue_id", unique: true
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "blockages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "issue_id"
+    t.integer "blocked_issue_id"
+    t.index ["blocked_issue_id"], name: "index_blockages_on_blocked_issue_id"
+    t.index ["issue_id", "blocked_issue_id"], name: "index_blockages_on_issue_id_and_blocked_issue_id", unique: true
+    t.index ["issue_id"], name: "index_blockages_on_issue_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false

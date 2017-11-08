@@ -8,10 +8,7 @@ FactoryGirl.define do
     category_id { Faker::Number.digit }
     project_id { Faker::Number.digit }
     
-    assigned_to_id { Faker::Number.digit }
     created_by_id { Faker::Number.digit }
-    
-    blocked_by_id nil
     
     estimated_time nil
     story_points { Faker::Number.digit }
