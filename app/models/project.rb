@@ -3,6 +3,8 @@ class Project < ApplicationRecord
     has_many :roles
     has_many :workingons
     has_many :users, :through => :workingons
+    has_many :statuses
+    has_many :categories
     
     def create_owner(current_user)
         
