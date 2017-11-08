@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     delete "/logout"      => "sessions#destroy"
     post   "/register"    => "users#create"
     
-    post 'projects'       => "projects#create"
+    post '/projects'       => "projects#create"
+    
+    post '/issues'        => "issues#create"
   end
   #, :format => true, :constraints => { :format => 'json' }
 end

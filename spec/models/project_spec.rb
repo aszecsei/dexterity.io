@@ -9,11 +9,11 @@ RSpec.describe Project, type: :model do
     expect(FactoryGirl.build(:project, name: nil)).to_not be_valid
   end
   it "has access to multiple roles" do
-    @project1 = FactoryGirl.create(:project)
-    FactoryGirl.create(:role, name: 'Scrum Master', project_id: 1)
-    FactoryGirl.create(:role, name: 'Project Owner', project_id: 1)
-    expect(@project1.roles[0].name).to eq('Scrum Master')
-    expect(@project1.roles[1].name).to eq('Project Owner')
+    project1 = FactoryGirl.create(:project)
+    role1 = FactoryGirl.create(:role, name: 'Scrum Master', project: project1)
+    role2 = FactoryGirl.create(:role, name: 'Project Owner', project: project1)
+    expect(project1.roles).to include(role1)
+    expect(project1.roles).to include(role2)
   end
   
   it "has access to multiple users" do
