@@ -3,8 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 class WelcomeController
   index: ->
-    $(document).on 'turbolinks:load', ->
-      $('.parallax').parallax()
-      return
+    console.log("Welcome!")
+    $('.parallax').parallax()
+    return
 
 this.app.welcome = new WelcomeController
