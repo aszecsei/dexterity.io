@@ -7,6 +7,27 @@
             %a.button-collapse{:href => '#', "data-activates" => 'nav-mobile', :class => 'button-collapse', "data-turbolinks" => 'false'}
                 %i.material-icons menu
             %ul.right
-                %li
-                    %a{:href => "#"}
-                        %i.material-icons more_vert
+                %a#logout.btn 
+                    Logout 
+
+:coffeescript
+    $('#logout').click (e) ->
+        url = "/api/logout"
+        $.ajax
+            type: 'DELETE'
+            headers: {"Authorization": "Token token=" + $("#token").val()}
+            url: url
+            success: (data) ->
+                window.location.replace("/")
+                return
+            error: (req, msg, stat) ->
+                console.log(req)
+                response = JSON.parse(req.responseText)
+                errorsArr = (msg.detail for msg in response.errors)
+                errorsHTML = errorsArr.join("\n")
+                alert(errorsHTML)
+                # $("#errorMsg").html(errorsHTML)
+                return
+            e.preventDefault()
+        return
+    return
