@@ -1,5 +1,4 @@
 class Issue < ApplicationRecord
-  before_create :set_defaults
   
   belongs_to :project
   belongs_to :status
@@ -7,7 +6,9 @@ class Issue < ApplicationRecord
   
   validates_presence_of :name
   
-  attribute :estimated_time, :duration
+  def estimated_time_string
+    ChronicDuration.output(270, :format => :short)
+  end
   
   has_many :assignments
   has_many :assigned_to, :through => :assignments
@@ -19,8 +20,4 @@ class Issue < ApplicationRecord
   
   has_many :blockers, foreign_key: :blocked_issue_id, class_name: 'Blockage'
   has_many :blocked_by, through: :blockers, source: :issue
-  
-  def set_defaults()
-    
-  end
 end
