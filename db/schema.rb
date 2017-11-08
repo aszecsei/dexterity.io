@@ -47,15 +47,11 @@ ActiveRecord::Schema.define(version: 20171108175824) do
     t.integer "status_id", null: false
     t.integer "category_id", null: false
     t.integer "project_id", null: false
-    t.integer "assigned_to_id"
     t.integer "created_by_id", null: false
-    t.integer "blocked_by_id"
     t.string "estimated_time"
     t.integer "story_points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["assigned_to_id"], name: "index_issues_on_assigned_to_id"
-    t.index ["blocked_by_id"], name: "index_issues_on_blocked_by_id"
     t.index ["category_id"], name: "index_issues_on_category_id"
     t.index ["created_by_id"], name: "index_issues_on_created_by_id"
     t.index ["project_id"], name: "index_issues_on_project_id"
