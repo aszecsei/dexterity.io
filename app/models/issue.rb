@@ -1,4 +1,6 @@
 class Issue < ApplicationRecord
+  before_create :set_defaults
+  
   belongs_to :project
   belongs_to :status
   belongs_to :category
@@ -17,4 +19,8 @@ class Issue < ApplicationRecord
   
   has_many :blockers, foreign_key: :blocked_issue_id, class_name: 'Blockage'
   has_many :blocked_by, through: :blockers, source: :issue
+  
+  def set_defaults()
+    
+  end
 end
