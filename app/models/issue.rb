@@ -16,5 +16,5 @@ class Issue < ApplicationRecord
   has_many :blocked_issues, :through => :blockages
   
   has_many :blockers, foreign_key: :blocked_issue_id, class_name: 'Blockage'
-  has_many :blocking_issues, through: :blockers, source: :issue
+  has_many :blocked_by, through: :blockers, source: :issue
 end
