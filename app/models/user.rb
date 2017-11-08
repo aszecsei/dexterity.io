@@ -6,7 +6,9 @@ class User < ApplicationRecord
     has_many :projects, :through => :workingons
     has_many :roles, :through => :workingons
     
+    has_many :assignments
     has_many :assigned_issues, :through => :assignments
+    
     has_many :created_issues, foreign_key: "created_by_id", class_name: "Issue"
 
     # This method is not available in has_secure_token
