@@ -35,13 +35,10 @@ gem 'haml'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'jquery-validation-rails'
-<<<<<<< HEAD
+gem 'jquery-ui-rails'
 gem 'chronic_duration'
 # Resort is used for making swimlanes act like a linked list
 gem 'resort'
-=======
-gem 'jquery-ui-rails'
->>>>>>> feature-swimlaneView
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -3,12 +3,69 @@
     .row#swimlane-row
         -@swimlane.each do |key|
             .col.s8.m4.l2
-                %ul{id => "swimlane_" + @key.name}.connectedSortable
+                %ul.connectedSortable{id => "swimlane_" + key.name}
                     -@key.issues.each do |issue|
                     %li.ui-state-default
                         .card.small
                             .card-content.grey-text.text-darken-4
-                                 %span.card-title
+                                %span.card-title
                                     = issue.name
                                 %p
                                     = issue.description
+    .fixed-action-btn{:style => "bottom: 50px; right: 19px;"}
+        %a.btn-floating.btn-large.modal-trigger{:href =>"#addModal"}
+            %i.material-icons 
+                add
+                
+= form_tag '#', id: "add" do 
+    .modal#addModal
+        .modal-content
+            %h4 
+                Add New Issue
+            .input-field
+                %input{:type =>"text",:id => "name",:name => "name","data-error"=>".errorTxt1", :required =>""}
+                %label{:for=>"name"}
+                    Nam 
+                .errorTxt1
+            .input-field
+                %textarea.materialize-textarea{:id => "description", :name => "description", "data-error"=>".errorTxt2"}
+                %label{:for=>"description"}
+                    Description
+                .errorTxt2
+            .input-field
+                %select{:id => "status", :name => "status", "data-error"=>".errorTxt2"}
+                    %option.todo{:value = "ToDo"}
+                        To Do
+                    %option.inprogress{:value = "InProgress"}
+                        In Progress
+                    %option.success{:value = "Success"}
+                        Success
+                %label{:for=>"status"}
+                    Status
+                .errorTxt3
+            .input-field
+                %select{:id => "category", :name => "category", "data-error"=>".errorTxt3"}
+                    -@categories.each |category|
+                        %option.{category.name.downcase}{:value = category.name}
+                %label{:for=>"category"}
+                    Category
+                .errorTxt4
+            .input-field
+                %select{:id => "swimlane", :name => "swimlane", "data-error"=>".errorTxt5", :disabled => "true"}
+                    -@swimlane.each |swimlane|
+                        %option.{swimlane.name.downcase}{:value = swimlane.name}
+                %label{:for=>"swimlane"}
+                    Category
+                .errorTxt5
+            .input-field
+                %select{:id => "assignee", :name => "assignee", "data-error"=>".errorTxt6", :disabled => "true"}
+                    -@swimlane.each |swimlane|
+                        %option.{swimlane.name.downcase}{:value = swimlane.name}
+                %label{:for=>"assignee"}
+                    Assignee    
+                .errorTxt6
+        .modal-footer
+            %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
+                %span.orange-text
+                    Submit
+    = hidden_field_tag 'token', @current_user.token
