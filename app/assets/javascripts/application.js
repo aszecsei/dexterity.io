@@ -18,6 +18,7 @@
 //= require generators
 //= require dexterityio
 //= require_tree .
+//= require jquery-ui/widgets/sortable
 
 document.addEventListener('turbolinks:load', function() {
   var $body = $("body")
