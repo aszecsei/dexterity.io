@@ -3,15 +3,15 @@
     .row#swimlane-row
         -@swimlane.each do |key|
             .col.s8.m4.l2
-                %ul.connectedSortable{id => "swimlane_" + key.name}
+                %ul.connectedSortable{id => "swimlane_" + #{key.name}}
                     -@key.issues.each do |issue|
                     %li.ui-state-default
                         .card.small
                             .card-content.grey-text.text-darken-4
                                 %span.card-title
-                                    = issue.name
+                                    = #{issue.name}
                                 %p
-                                    = issue.description
+                                    = #{issue.description}
     .fixed-action-btn{:style => "bottom: 50px; right: 19px;"}
         %a.btn-floating.btn-large.modal-trigger{:href =>"#addModal"}
             %i.material-icons 
@@ -34,11 +34,11 @@
                 .errorTxt2
             .input-field
                 %select{:id => "status", :name => "status", "data-error"=>".errorTxt2"}
-                    %option.todo{:value = "ToDo"}
+                    %option.todo{:value => "ToDo"}
                         To Do
-                    %option.inprogress{:value = "InProgress"}
+                    %option.inprogress{:value => "InProgress"}
                         In Progress
-                    %option.success{:value = "Success"}
+                    %option.success{:value => "Success"}
                         Success
                 %label{:for=>"status"}
                     Status
@@ -46,21 +46,21 @@
             .input-field
                 %select{:id => "category", :name => "category", "data-error"=>".errorTxt3"}
                     -@categories.each |category|
-                        %option.{category.name.downcase}{:value = category.name}
+                        %option{:class => #{category.name.downcase}, :value => #{category.name}}
                 %label{:for=>"category"}
                     Category
                 .errorTxt4
             .input-field
                 %select{:id => "swimlane", :name => "swimlane", "data-error"=>".errorTxt5", :disabled => "true"}
                     -@swimlane.each |swimlane|
-                        %option.{swimlane.name.downcase}{:value = swimlane.name}
+                        %option{:class => #{swimlane.name.downcase}, :value => #{swimlane.name}}
                 %label{:for=>"swimlane"}
-                    Category
+                    swimlane
                 .errorTxt5
             .input-field
                 %select{:id => "assignee", :name => "assignee", "data-error"=>".errorTxt6", :disabled => "true"}
-                    -@swimlane.each |swimlane|
-                        %option.{swimlane.name.downcase}{:value = swimlane.name}
+                    -@user.each |user|
+                        %option{:class => #{user.displayName.downcase}, :value => #{user.displayName}}
                 %label{:for=>"assignee"}
                     Assignee    
                 .errorTxt6
