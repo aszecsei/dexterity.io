@@ -12,13 +12,13 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require jquery-ui
 //= require turbolinks
 //= require materialize-sprockets
 //= require jquery.validate
 //= require generators
 //= require dexterityio
 //= require_tree .
-//= require jquery-ui/widgets/sortable
 
 document.addEventListener('turbolinks:load', function() {
   var $body = $("body")
@@ -36,4 +36,5 @@ document.addEventListener('turbolinks:load', function() {
       activeController[action]();
     }
   }
+  
 });

@@ -1,5 +1,7 @@
 class SwimlanesController < ApplicationController
+    before_action :require_login, raise: false
+    
     def index
-        @title = current_project
+        @title = "title"
     end
 end
