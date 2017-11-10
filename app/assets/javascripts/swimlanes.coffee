@@ -34,4 +34,28 @@ class SwimlanesController
             else
                 error.insertAfter element
             return
+        $("#add").submit (e) ->
+          console.log("Boo!")
+          url = "/api/issues"
+          $.ajax
+            type: 'POST'
+            headers: {"Authorization": "Token token=" + $("#token").val()}
+            url: url
+            data: $("#add").serialize()
+            success: (data) ->
+              $("#projects-row").append(generateProjectCard(data.name, data.description, '#', '#', '#'))
+              $("#addModal").modal('close');
+              return
+            error: (req, msg, stat) ->
+              console.log(req)
+              response = JSON.parse(req.responseText)
+              errorsArr = (msg.detail for msg in response.errors)
+              errorsHTML = errorsArr.join("\n")
+              alert(errorsHTML)
+              # $("#errorMsg").html(errorsHTML)
+              return
+          e.preventDefault()
+          
+          return
+        return
 this.app.swimlanes = new SwimlanesController
