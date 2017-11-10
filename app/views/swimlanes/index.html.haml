@@ -21,7 +21,7 @@
 = form_tag '#', id: "add" do 
     .modal#addModal
         .modal-content
-            %h4 
+            %h4.center
                 Add New Issue
             .input-field
                 %input{:type =>"text",:id => "name",:name => "name","data-error"=>".errorTxt1"}
@@ -48,6 +48,7 @@
                 %select{:id => "category", :name => "category", "data-error"=>".errorTxt3"}
                     -@categories.each do |category|
                         %option{:class => category.name.downcase, :value => category.name}
+                            =category.name
                 %label{:for=>"category"}
                     Category
                 .errorTxt4
@@ -62,9 +63,31 @@
                 %select{:id => "assignee", :name => "assignee", "data-error"=>".errorTxt6", :disabled => "true"}
                     -@user.each do |user|
                         %option{:class => user.displayName.downcase, :value => user.displayName}
+                            =user.displayName
                 %label{:for=>"assignee"}
                     Assignee    
                 .errorTxt6
+            %h6.center 
+                Expected time to completion
+            .row
+                .col.s4
+                    .input-field
+                        %input{:type =>"number",:id => "minutes",:name => "minutes",:value => "0", :min => "0", "data-error"=>".errorTxt7"}
+                        %label{:for=>"minutes"}
+                            Minutes
+                        .errorTxt7
+                .col.s4
+                    .input-field
+                        %input{:type =>"number",:id => "hours",:name => "hours",:value => "0", :min => "0", "data-error"=>".errorTxt8"}
+                        %label{:for=>"hours"}
+                            Hours
+                        .errorTxt8
+                .col.s4
+                    .input-field
+                        %input{:type =>"number",:id => "days",:name => "days",:value => "0", :min => "0", "data-error"=>".errorTxt9"}
+                        %label{:for=>"days"}
+                            Days
+                        .errorTxt9
         .modal-footer
             %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
                 %span.orange-text
