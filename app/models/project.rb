@@ -79,4 +79,28 @@ class Project < ApplicationRecord
             :role => ownerRole
         })
     end
+    
+    def add_user(username, rolename)
+        if user = find_by(username: username)
+            role = add_role(rolename)
+            workingons.create({
+                :user => user,
+                :role => role
+            })
+        end
+    end
+    
+    def add_role(role_name)
+        roles.create({
+            :name => role_name
+        })
+    end
+    
+    def edit_project(projectOldName, projectNewName, projectdescription)
+        if proj = find_by(name: projectOldName)
+            proj.name = projectNewName
+            proj.description = projectdescription
+            proj.save
+        end
+    end
 end
