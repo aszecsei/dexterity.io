@@ -34,31 +34,21 @@
                     Description
                 .errorTxt2
             .input-field
-                %select{:id => "status", :name => "status", "data-error"=>".errorTxt2"}
-                    %option.todo{:value => "ToDo"}
-                        To Do
-                    %option.inprogress{:value => "InProgress"}
-                        In Progress
-                    %option.success{:value => "Success"}
-                        Success
-                %label{:for=>"status"}
+                %select{:id => "status_id", :name => "status_id", "data-error"=>".errorTxt2"}
+                    -@status.each do |status|
+                        %option{:class => status.name.downcase, :value => status.id}
+                            =status.name
+                %label{:for=>"status_id"}
                     Status
                 .errorTxt3
             .input-field
-                %select{:id => "category", :name => "category", "data-error"=>".errorTxt3"}
+                %select{:id => "category_id", :name => "category_id", "data-error"=>".errorTxt3"}
                     -@categories.each do |category|
-                        %option{:class => category.name.downcase, :value => category.name}
+                        %option{:class => category.name.downcase, :value => category.id}
                             =category.name
-                %label{:for=>"category"}
+                %label{:for=>"category_id"}
                     Category
                 .errorTxt4
-            /.input-field
-            /    %select{:id => "swimlane", :name => "swimlane", "data-error"=>".errorTxt5", :disabled => "true"}
-            /        -@swimlane.each do |swimlane|
-            /            %option{:class => swimlane.name.downcase, :value => swimlane.name}
-            /    %label{:for=>"swimlane"}
-            /        Swimlane
-            /    .errorTxt5
             .input-field
                 %select{:id => "assignee", :name => "assignee", "data-error"=>".errorTxt6", :disabled => "true"}
                     -@user.each do |user|
@@ -67,27 +57,17 @@
                 %label{:for=>"assignee"}
                     Assignee    
                 .errorTxt6
-            %h6.center 
-                Expected time to completion
-            .row
-                .col.s4
-                    .input-field
-                        %input{:type =>"number",:id => "minutes",:name => "minutes",:value => "0", :min => "0", "data-error"=>".errorTxt7"}
-                        %label{:for=>"minutes"}
-                            Minutes
-                        .errorTxt7
-                .col.s4
-                    .input-field
-                        %input{:type =>"number",:id => "hours",:name => "hours",:value => "0", :min => "0", "data-error"=>".errorTxt8"}
-                        %label{:for=>"hours"}
-                            Hours
-                        .errorTxt8
-                .col.s4
-                    .input-field
-                        %input{:type =>"number",:id => "days",:name => "days",:value => "0", :min => "0", "data-error"=>".errorTxt9"}
-                        %label{:for=>"days"}
-                            Days
-                        .errorTxt9
+            .input-field
+                %input{:type =>"text",:id => "estimated_time",:name => "estimated_time", "data-error"=>".errorTxt7"}
+                %label{:for=>"estimated_time"}
+                    Estimated Time to Completion
+                .errorTxt7
+            .input-field
+                %input{:type =>"number",:id => "story_points",:name => "story_points",:value =>"0", :min => "0","data-error"=>".errorTxt8"}
+                %label{:for=>"story_points"}
+                    Story Points
+                .errorTxt8
+            %input{:type =>"hidden", :name => "project_id",:value => @project.id}
         .modal-footer
             %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
                 %span.orange-text

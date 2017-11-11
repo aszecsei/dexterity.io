@@ -12,15 +12,13 @@ class SwimlanesController
             rules:
                 name:
                     required: true
-                    minlength: 5
                 description:
                     required: true
                 status:
                     required: true
                 category:
                     required: true
-                swimlane:
-                    required: true
+
                 assignee:
                     required: true
             messages:
@@ -44,7 +42,8 @@ class SwimlanesController
             url: url
             data: $("#add").serialize()
             success: (data) ->
-              $("#projects-row").append(generateProjectCard(data.name, data.description, '#', '#', '#'))
+              #$("#projects-row").append(generateProjectCard(data.name, data.description, '#', '#', '#'))
+              
               $("#addModal").modal('close');
               return
             error: (req, msg, stat) ->

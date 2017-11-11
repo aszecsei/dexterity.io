@@ -8,6 +8,7 @@ class SwimlanesController < ApplicationController
         @categories = @project.categories
         #@swimlanes = @project.swimlanes
         @user = @project.users
+        @status = @project.statuses
 
     end
 end
