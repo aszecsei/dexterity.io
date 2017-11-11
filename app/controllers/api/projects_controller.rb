@@ -15,4 +15,40 @@ class Api::ProjectsController < Api::ApiController
     end
   end
   
+  #intake user email/name and project name
+  def addUser
+    if add_user(params[:username],params[:rolename])
+      head :no_content
+    else
+      render_error(:unprocessable_entity, "Could not add user")
+    end
+  end
+  
+  #intake project name
+  def edit
+    if edit_project(params[:projectOldName], params[:projectNewName], params[:projectdescription])
+      head :no_content
+    else
+      render_error(:unprocessable_entity, "Failed to edit project")
+    end
+  end
+  
+  #intake role and project name
+  def addRole
+    if add_role(params[:rolename])
+      head :no_content
+    else
+      render_error(:unprocessable_entity, "Failed to add a role")
+    end
+  end
+  
+  #intake user email/name and role and project name
+  def assignedRole
+    if assigned_role(params[:username], params[:rolename])
+      head :no_content
+    else
+      render_error(:unprocessable_entity, "Failed to assign a role")
+    end
+  end
+  
 end
