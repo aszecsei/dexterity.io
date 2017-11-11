@@ -37,6 +37,7 @@ class SwimlanesController
         $("#add").submit (e) ->
           console.log("Boo!")
           url = "/api/issues"
+          data = "name="+$(name)
           $.ajax
             type: 'POST'
             headers: {"Authorization": "Token token=" + $("#token").val()}
