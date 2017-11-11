@@ -103,4 +103,15 @@ class Project < ApplicationRecord
             proj.save
         end
     end
+    
+    def assigned_role(username, rolename)
+        user = find_by(username: username) 
+        role = find_by(name: rolename)
+        if user && role
+            workingons.create({
+                :user => user,
+                :role => role
+            })
+        end
+    end
 end
