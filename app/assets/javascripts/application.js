@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require jquery-ui
 //= require turbolinks
 //= require materialize-sprockets
 //= require jquery.validate
@@ -35,4 +36,5 @@ document.addEventListener('turbolinks:load', function() {
       activeController[action]();
     }
   }
+  
 });

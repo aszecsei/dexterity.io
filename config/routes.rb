@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get  '/login'     => 'sessions#new'
   post '/login'     => 'sessions#create'
   get  '/register'  => 'users#new'
+  get ':id/swimlanes' => 'swimlanes#index'
   
 
   namespace :api do

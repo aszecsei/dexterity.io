@@ -1,0 +1,75 @@
+= render :partial => "shared/sidenav"
+%main.container
+    .row#swimlane-row
+        /-@swimlane.each do |key|
+        /    .col.s8.m4.l2
+        /        %ul.connectedSortable{id => "swimlane_" + key.name}
+        /            -@key.issues.each do |issue|
+        /                %li.ui-state-default
+        /                    .card.small
+        /                        .card-content.grey-text.text-darken-4
+        /                            %span.card-title
+        /                                =issue.name
+        /                            %p
+        /                                =issue.description
+                                        
+    .fixed-action-btn{:style => "bottom: 50px; right: 19px;"}
+        %a.btn-floating.btn-large.modal-trigger{:href =>"#addModal"}
+            %i.material-icons 
+                add
+                
+= form_tag '#', id: "add" do 
+    .modal#addModal
+        .modal-content
+            %h4.center
+                Add New Issue
+            .input-field
+                %input{:type =>"text",:id => "name",:name => "name","data-error"=>".errorTxt1"}
+                %label{:for=>"name"}
+                    Name
+                .errorTxt1
+            .input-field
+                %textarea.materialize-textarea{:id => "description", :name => "description", "data-error"=>".errorTxt2"}
+                %label{:for=>"description"}
+                    Description
+                .errorTxt2
+            .input-field
+                %select{:id => "status_id", :name => "status_id", "data-error"=>".errorTxt2"}
+                    -@status.each do |status|
+                        %option{:class => status.name.downcase, :value => status.id}
+                            =status.name
+                %label{:for=>"status_id"}
+                    Status
+                .errorTxt3
+            .input-field
+                %select{:id => "category_id", :name => "category_id", "data-error"=>".errorTxt3"}
+                    -@categories.each do |category|
+                        %option{:class => category.name.downcase, :value => category.id}
+                            =category.name
+                %label{:for=>"category_id"}
+                    Category
+                .errorTxt4
+            .input-field
+                %select{:id => "assignee", :name => "assignee", "data-error"=>".errorTxt6", :disabled => "true"}
+                    -@user.each do |user|
+                        %option{:class => user.displayName.downcase, :value => user.displayName}
+                            =user.displayName
+                %label{:for=>"assignee"}
+                    Assignee    
+                .errorTxt6
+            .input-field
+                %input{:type =>"text",:id => "estimated_time",:name => "estimated_time", "data-error"=>".errorTxt7"}
+                %label{:for=>"estimated_time"}
+                    Estimated Time to Completion
+                .errorTxt7
+            .input-field
+                %input{:type =>"number",:id => "story_points",:name => "story_points",:value =>"0", :min => "0","data-error"=>".errorTxt8"}
+                %label{:for=>"story_points"}
+                    Story Points
+                .errorTxt8
+            %input{:type =>"hidden", :name => "project_id",:value => @project.id}
+        .modal-footer
+            %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
+                %span.orange-text
+                    Submit
+    = hidden_field_tag 'token', @current_user.token

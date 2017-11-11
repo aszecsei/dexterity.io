@@ -35,6 +35,7 @@ gem 'haml'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'jquery-validation-rails'
+gem 'jquery-ui-rails'
 gem 'chronic_duration'
 # Resort is used for making swimlanes act like a linked list
 gem 'resort'
