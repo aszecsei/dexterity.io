@@ -38,7 +38,7 @@ class ProjectsController
         url: url
         data: $("#add").serialize()
         success: (data) ->
-          $("#projects-row").append(generateProjectCard(data.name, data.description, '#', '#', '#'))
+          $("#projects-row").append(generateProjectCard(data.name, data.description, "/projects/#{data.id}", "#", "#"))
           $("#addModal").modal('close');
           return
         error: (req, msg, stat) ->
