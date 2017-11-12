@@ -6,7 +6,6 @@ class SwimlanesController < ApplicationController
         @title = "Project #{id}"
         @project = Project.find(id) # look up project by unique ID
         @categories = @project.categories
-        #@swimlanes = @project.swimlanes
         @user = @project.users
         @status = @project.statuses
 
