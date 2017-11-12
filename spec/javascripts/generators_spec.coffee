@@ -12,7 +12,7 @@ describe "Card Generator", ->
           Desc
         </div>
         <div class="card-action">
-          <a href="#", data-turbolinks="false">Open</a>
+          <a href="#">Open</a>
           <a href="#", data-turbolinks="false">Edit</a>
           <a href="#", data-turbolinks="false">Delete</a>
         </div>

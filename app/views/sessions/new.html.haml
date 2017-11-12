@@ -21,11 +21,11 @@
                                         Password
                         .card-action
                             
-                            %button.waves-effect.waves-teal.btn-flat
+                            %button.waves-effect.waves-teal.btn-flat#login_button
                                 %span.orange-text
                                     Login
                             %a{:href =>"/register"}
-                                %button.waves-effect.waves-teal.btn-flat
+                                %button.waves-effect.waves-teal.btn-flat#register-button
                                     %span.orange-text
                                         Register
         = form_tag login_path, id: "formSession" do
