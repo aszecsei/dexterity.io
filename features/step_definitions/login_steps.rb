@@ -1,13 +1,13 @@
-Given(/^I have registered/) do
-    visit register_path
-    fill_in('username', :with => 'Testing')
-    fill_in('email', :with => 'Testing@testing.test')
-    fill_in('displayName', :with => 'Testing')
-    fill_in('password', :with => 'Testing')
-    fill_in('confirmpassword', :with => 'Testing')
-    click_button('register-button')
-    wait_for_ajax
-end
+#Given(/^I have registered/) do
+#     visit register_path
+#     fill_in('username', :with => 'Testing')
+#     fill_in('email', :with => 'Testing@testing.test')
+#     fill_in('displayName', :with => 'Testing')
+#     fill_in('password', :with => 'Testing')
+#     fill_in('confirmpassword', :with => 'Testing')
+#     click_button('register-button')
+#     wait_for_ajax
+# end
 
 When(/^I go to the login page$/) do
   visit login_path

@@ -16,7 +16,6 @@ require 'simplecov'
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-Capybara.default_wait_time = 5
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
