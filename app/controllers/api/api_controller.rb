@@ -8,6 +8,10 @@ class Api::ApiController < ActionController::API
     def current_user
         @current_user ||= authenticate_token
     end
+    
+    def current_proj
+        @current_proj ||= authenticate_proj
+    end
 
     protected
 
@@ -26,6 +30,12 @@ class Api::ApiController < ActionController::API
         authenticate_with_http_token do |token, options|
             # Compare the tokens in a time-constant manner, to mitigate timing attacks
             User.find_by(token: token)
+        end
+    end
+    
+    def authenticate_proj
+        authenticate_with_http_proj do |name, options|
+            Project.find_by(name: name)
         end
     end
 end

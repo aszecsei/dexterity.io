@@ -15,9 +15,11 @@ class Api::ProjectsController < Api::ApiController
     end
   end
   
-  #intake user email/name and project name
+  #intake user email/name and role name
   def addUser
-    if add_user(params[:username],params[:rolename])
+    #proj = Project.find_by(name: name)
+    proj = current_proj
+    if proj.add_user(params[:username],params[:rolename])
       head :no_content
     else
       render_error(:unprocessable_entity, "Could not add user")

@@ -5,7 +5,6 @@ class Api::UsersController < Api::ApiController
   end
   
   def create
-
     user_params[:displayName] =user_params[:username]
     p user_params
     

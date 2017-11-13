@@ -28,4 +28,39 @@ RSpec.describe Api::ProjectsController, type: :controller do
       expect(response.body).to include('A project')
     end
   end
+  
+  describe 'POST #addUser' do
+    it 'should require the user to be logged in' do
+      FactoryGirl.create(:user, username: 'test1', password: '123456')
+      post :addUser, params: {username: 'test1', rolename:'developer'}
+      expect(response).to have_http_status(:unauthorized)
+    end
+    
+    it 'should require a username' do
+      usr = api_login
+      post :addUser, params: {rolename:'developer'}
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+    
+    it 'should require a valid username' do
+      usr = api_login
+      FactoryGirl.create(:user, username: 'test1', password: '123456')
+      post :addUser, params: {username: 'test2', rolename:'developer'}
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+    
+    it 'should require a role name' do
+      usr = api_login
+      FactoryGirl.create(:user, username: 'test1', password: '123456')
+      post :addUser, params: {username: 'test2'}
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+    
+    it 'should add user to the project as rolename' do
+      usr = api_login
+      FactoryGirl.create(:user, username: 'test1', password: '123456')
+      post :addUser, params: {username: 'test1', rolename:'developer'}
+      expect(response).to have_http_status(:no_content)
+    end
+  end
 end
