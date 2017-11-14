@@ -81,41 +81,52 @@ class Project < ApplicationRecord
     end
     
     def add_user(username, rolename)
-        if user = find_by(username: username)
+        if user = User.find_by_username(username)
             role = add_role(rolename)
             w = workingons.create({
                 :user => user,
                 :role => role
             })
             w
+        else
+            false
+        end
+    end
+    
+        
+    def edit(name, description)
+        if name == nil || description == nil
+            false
+        else
+            self.update_columns(name: name, description: description)
         end
     end
     
     def add_role(role_name)
-        r = roles.create({
-            :name => role_name
-        })
-        r
-    end
-    
-    def edit_project(projectOldName, projectNewName, projectdescription)
-        if proj = find_by(name: projectOldName)
-            proj.name = projectNewName
-            proj.description = projectdescription
-            proj.save
-            proj
+        if role_name == nil
+            false
+        else
+            r = roles.create({
+                :name => role_name
+            })
+            r
         end
     end
     
     def assigned_role(username, rolename)
-        user = find_by(username: username) 
-        role = find_by(name: rolename)
-        if user && role
-            w = workingons.create({
-                :user => user,
-                :role => role
-            })
-            w
+        if user = User.find_by_username(username) 
+            role = Role.find_by(name: rolename)
+            if user && role
+                w = workingons.create({
+                    :user => user,
+                    :role => role
+                })
+                w
+            else
+                false
+            end
+        else
+            false
         end
     end
 end

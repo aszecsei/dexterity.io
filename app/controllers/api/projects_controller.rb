@@ -15,10 +15,10 @@ class Api::ProjectsController < Api::ApiController
     end
   end
   
-  #intake user email/name and role name
+  #intake user email/name and project name
   def addUser
-    #proj = Project.find_by(name: name)
-    proj = current_proj
+    id = params[:id] # retrieve project ID from URI route
+    proj = Project.find(id)
     if proj.add_user(params[:username],params[:rolename])
       head :no_content
     else
@@ -28,7 +28,9 @@ class Api::ProjectsController < Api::ApiController
   
   #intake project name
   def edit
-    if edit_project(params[:projectOldName], params[:projectNewName], params[:projectdescription])
+    id = params[:id] # retrieve project ID from URI route
+    proj = Project.find(id)
+    if proj.edit(params[:name], params[:description])
       head :no_content
     else
       render_error(:unprocessable_entity, "Failed to edit project")
@@ -37,7 +39,9 @@ class Api::ProjectsController < Api::ApiController
   
   #intake role and project name
   def addRole
-    if add_role(params[:rolename])
+    id = params[:id] # retrieve project ID from URI route
+    proj = Project.find(id)
+    if proj.add_role(params[:rolename])
       head :no_content
     else
       render_error(:unprocessable_entity, "Failed to add a role")
@@ -46,7 +50,11 @@ class Api::ProjectsController < Api::ApiController
   
   #intake user email/name and role and project name
   def assignedRole
-    if assigned_role(params[:username], params[:rolename])
+    id = params[:id] # retrieve project ID from URI route
+    rolename = params[:rolename]
+    proj = Project.find(id)
+    role = Role.find_by(project_id: id)
+    if proj.assigned_role(params[:username], rolename)
       head :no_content
     else
       render_error(:unprocessable_entity, "Failed to assign a role")
