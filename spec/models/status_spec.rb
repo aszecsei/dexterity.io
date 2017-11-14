@@ -19,4 +19,13 @@ RSpec.describe Status, type: :model do
   it "is invalid without a project" do
     expect(FactoryGirl.build(:status, project: nil)).to_not be_valid
   end
+  
+  it "should be able to accsess issues" do
+    proj = FactoryGirl.create(:project)
+    user = FactoryGirl.create(:user)
+    cat = FactoryGirl.create(:category, :project => proj)
+    stat = FactoryGirl.create(:status, :project =>proj)
+    iss = FactoryGirl.create(:issue, status: stat, project: proj, category: cat, created_by: user)
+    expect(stat.issues).to include(iss)
+  end
 end
