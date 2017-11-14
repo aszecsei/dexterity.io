@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108175824) do
+ActiveRecord::Schema.define(version: 20171114233241) do
 
   create_table "assignments", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -52,8 +52,12 @@ ActiveRecord::Schema.define(version: 20171108175824) do
     t.integer "story_points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "next_id"
+    t.boolean "first"
     t.index ["category_id"], name: "index_issues_on_category_id"
     t.index ["created_by_id"], name: "index_issues_on_created_by_id"
+    t.index ["first"], name: "index_issues_on_first"
+    t.index ["next_id"], name: "index_issues_on_next_id"
     t.index ["project_id"], name: "index_issues_on_project_id"
     t.index ["status_id"], name: "index_issues_on_status_id"
   end

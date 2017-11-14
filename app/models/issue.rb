@@ -1,4 +1,6 @@
 class Issue < ApplicationRecord
+
+  resort!
   
   belongs_to :project
   belongs_to :status
@@ -20,4 +22,8 @@ class Issue < ApplicationRecord
   
   has_many :blockers, foreign_key: :blocked_issue_id, class_name: 'Blockage'
   has_many :blocked_by, through: :blockers, source: :issue
+  
+  def siblings
+    self.status.issues
+  end
 end
