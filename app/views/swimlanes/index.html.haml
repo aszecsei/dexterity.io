@@ -1,6 +1,5 @@
 = render :partial => "shared/sidenav"
 %main.container
-                                        
     .row#status-row
         -@status.each do |status|
             .col.s12.m6.l3
@@ -10,7 +9,7 @@
                 %ul.connectedSortable{:id => "swimlane_" + status.name}
                     -status.issues.each do |issue|
                         %li.ui-state-default
-                            .card.small
+                            .card
                                 .card-content.grey-text.text-darken-4
                                     %span.card-title
                                         =issue.name
