@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
   root :to => 'welcome#index'
   
-  get 'projects/:id', to: 'projects#show'
   get 'projects', to: 'projects#index'
 
   get  '/login'     => 'sessions#new'
   post '/login'     => 'sessions#create'
   get  '/register'  => 'users#new'
-  get ':id/swimlanes' => 'swimlanes#index'
+  get '/projects/:id' => 'swimlanes#index'
   
 
   namespace :api do
