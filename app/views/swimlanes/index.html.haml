@@ -7,7 +7,7 @@
                 .statusName
                     %h5
                         =status.name
-                %ul.connectedSortable{id => "swimlane_" + status.name}
+                %ul.connectedSortable{:id => "swimlane_" + status.name}
                     -status.issues.each do |issue|
                         %li.ui-state-default
                             .card.small
