@@ -2,7 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .connectedSortable {
-    border: 1px solid #eee;
+    border: 2px solid #ffc107;
+    background: #f0f0f0;
+    border-radius: 5px ;
     min-height: 100px;
     list-style-type: none;
 
