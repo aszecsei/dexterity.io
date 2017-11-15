@@ -9,12 +9,17 @@
                 %ul.connectedSortable{:id => "swimlane_" + status.id.to_s}
                     -status.issues.each do |issue|
                         %li.ui-state-default
-                            .card
+                            .card{:id => issue.id}
                                 .card-content.grey-text.text-darken-4
                                     %span.card-title
                                         =issue.name
                                     %p
                                         =issue.description
+                                        .chip
+                                            =issue.category.name
+                                        .chip
+                                            SP: #{issue.story_points}
+                                            
                 
     .fixed-action-btn{:style => "bottom: 50px; right: 19px;"}
         %a.btn-floating.btn-large.modal-trigger{:href =>"#addModal"}
