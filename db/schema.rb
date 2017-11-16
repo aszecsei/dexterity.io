@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114233241) do
+ActiveRecord::Schema.define(version: 20171115180527) do
 
   create_table "assignments", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -91,6 +91,10 @@ ActiveRecord::Schema.define(version: 20171114233241) do
     t.integer "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "next_id"
+    t.boolean "first"
+    t.index ["first"], name: "index_statuses_on_first"
+    t.index ["next_id"], name: "index_statuses_on_next_id"
     t.index ["project_id"], name: "index_statuses_on_project_id"
   end
 
