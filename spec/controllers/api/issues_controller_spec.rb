@@ -58,5 +58,30 @@ RSpec.describe Api::IssuesController, type: :controller do
       
       expect(response).to have_http_status(:unprocessable_entity)
     end
+    
+    it "should reorder issues" do
+      api_login
+      post :create, params: {
+        description: 'A problem',
+        project_id: @proj.id,
+        status_id: @proj.statuses[0].id,
+        category_id: @proj.categories[0].id,
+        estimated_time: "1h 30m",
+        story_points: 3
+      }
+      post :create, params: {
+        description: 'Testing',
+        project_id: @proj.id,
+        status_id: @proj.statuses[0].id,
+        category_id: @proj.categories[0].id,
+        estimated_time: "50m",
+        story_points: 2
+      }
+      post :update, object: {
+        next_id: 2,
+        issue_id: 1,
+        status_id: 0
+      }
+    end
   end
 end
