@@ -5,9 +5,9 @@ class SwimlanesController
     index: ->
         $ ->
             $('[id^="swimlane_"]').sortable(
-                items: "li:not(.ui-state-disabled)"
-                stop: (event, ui) ->
-                    console.log ui.item[0]
+                items: "> :not(.ui-state-disabled)"
+                update: (event, ui) ->
+                    
                     ui.item[0].classList.add("ui-state-disabled")
                     indexAt = 0
                     id = ui.item[0].firstElementChild.id
@@ -18,6 +18,8 @@ class SwimlanesController
                         indexAt++
                     if indexAt != 0
                         next = ui.item.context.parentNode.children[indexAt - 1].firstElementChild.id
+                    data = {status_id:parent, issue_id:id, before_id:next}
+                    console.log data
                     $.ajax
                         type: 'POST'
                         headers: {"Authorization": "Token token=" + $("#token").val()}
@@ -35,7 +37,7 @@ class SwimlanesController
                             alert(errorsHTML)
                             # $("#errorMsg").html(errorsHTML)
                             return
-                      e.preventDefault()
+                    e.preventDefault()
                     return
                 connectWith: '.connectedSortable'
                 revert: true).disableSelection()
