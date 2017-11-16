@@ -38,7 +38,7 @@ gem 'jquery-validation-rails'
 gem 'jquery-ui-rails'
 gem 'chronic_duration'
 # Resort is used for making swimlanes act like a linked list
-gem 'resort'
+gem 'resort', :git => 'https://github.com/aszecsei/resort.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

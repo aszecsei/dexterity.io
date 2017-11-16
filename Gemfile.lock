@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/aszecsei/resort.git
+  revision: 87bbb850c7e70ae5e459c678ad1b9efa1f079d8a
+  specs:
+    resort (0.6.0)
+      activerecord (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      railties (>= 4.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -187,10 +196,6 @@ GEM
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    resort (0.6.0)
-      activerecord (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      railties (>= 4.0.0)
     rspec-core (3.7.0)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
@@ -294,7 +299,7 @@ DEPENDENCIES
   rails (~> 5.1.4)
   rails-controller-testing
   rails_12factor
-  resort
+  resort!
   rspec-expectations
   rspec-rails (~> 3.6)
   sass-rails (~> 5.0)
@@ -310,4 +315,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
