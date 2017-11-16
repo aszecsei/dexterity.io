@@ -4,7 +4,9 @@
 class SwimlanesController
     index: ->
         $ ->
-            $('[id^="swimlane_"]').sortable(connectWith: '.connectedSortable').disableSelection()
+            $('[id^="swimlane_"]').sortable(
+              connectWith: '.connectedSortable'
+              revert: true).disableSelection()
             return
         $('.modal').modal()
         $('select').material_select()
@@ -12,15 +14,13 @@ class SwimlanesController
             rules:
                 name:
                     required: true
-                    minlength: 5
                 description:
                     required: true
                 status:
                     required: true
                 category:
                     required: true
-                swimlane:
-                    required: true
+
                 assignee:
                     required: true
             messages:
@@ -43,7 +43,8 @@ class SwimlanesController
             url: url
             data: $("#add").serialize()
             success: (data) ->
-              $("#projects-row").append(generateProjectCard(data.name, data.description, '#', '#', '#'))
+              #$("#projects-row").append(generateProjectCard(data.name, data.description, '#', '#', '#'))
+              $("#swimlane_" + data.status_id).append($("<li class = 'ui-state-default'>").append(generateIssueCard(data.name,data.description)))
               $("#addModal").modal('close');
               return
             error: (req, msg, stat) ->

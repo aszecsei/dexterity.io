@@ -34,4 +34,21 @@ RSpec.describe Project, type: :model do
     proj.reload
     expect(proj.users[0].username).to eq(owner.username)
   end
+  
+  it "should be able to access statuses" do
+    proj = FactoryGirl.create(:project)
+    stat = FactoryGirl.create(:status, :project => proj)
+    expect(proj.statuses.ordered[4]).to eq(stat)
+  end
+  
+  it "should not be able to access statuses of other projects" do
+    proj1 = FactoryGirl.create(:project)
+    proj2 = FactoryGirl.create(:project)
+    stat1 = FactoryGirl.create(:status, :project => proj1)
+    stat2 = FactoryGirl.create(:status, :project => proj2)
+    expect(proj1.statuses).to include(stat1)
+    expect(proj1.statuses).to_not include(stat2)
+    expect(proj2.statuses).to_not include(stat1)
+    expect(proj2.statuses).to include(stat2)
+  end
 end
