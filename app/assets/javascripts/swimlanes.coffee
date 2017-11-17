@@ -6,38 +6,34 @@ class SwimlanesController
         $ ->
             $('[id^="swimlane_"]').sortable(
                 items: "> :not(.ui-state-disabled)"
-                update: (event, ui) ->
+                update: (e, ui) ->
                     
                     ui.item[0].classList.add("ui-state-disabled")
                     indexAt = 0
                     id = ui.item[0].firstElementChild.id
                     parent = ui.item.context.parentNode.id.split('_')[1]
-                    next = null
+                    next = -1
                     console.log 
                     while ui.item.context.parentNode.children[indexAt].firstElementChild.id != id
                         indexAt++
                     if indexAt != 0
                         next = ui.item.context.parentNode.children[indexAt - 1].firstElementChild.id
-                    data = {status_id:parent, issue_id:id, before_id:next}
+                    data = {status_id:parent, issue_id:id,prev_id:next}
                     console.log data
+                    url = "/api/issues/reorder"
                     $.ajax
                         type: 'POST'
                         headers: {"Authorization": "Token token=" + $("#token").val()}
                         url: url
-                        data: $("#add").serialize()
+                        data: data
                         success: (data) ->
                             #$("#projects-row").append(generateProjectCard(data.name, data.description, '#', '#', '#'))
                             ui.item[0].classList.remove("ui-state-disabled")
                             return
                         error: (req, msg, stat) ->
-                            console.log(req)
-                            response = JSON.parse(req.responseText)
-                            errorsArr = (msg.detail for msg in response.errors)
-                            errorsHTML = errorsArr.join("\n")
-                            alert(errorsHTML)
-                            # $("#errorMsg").html(errorsHTML)
+                            alert("AJAX Issue");
+                            location.reload();
                             return
-                    e.preventDefault()
                     return
                 connectWith: '.connectedSortable'
                 revert: true).disableSelection()
