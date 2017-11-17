@@ -37,4 +37,21 @@ RSpec.describe Api::UsersController, type: :controller do
       expect(response).to have_http_status(:no_content)
     end
   end
+  
+  describe 'POST #update' do 
+    it 'should update user information' do 
+      usr = api_login
+      post :update, params:{username: 'test'}
+      usr.reload
+      expect(usr.username).to eq('test') 
+    end
+  end 
+  
+  describe 'POST #change_password' do
+    it 'should detect invalid user password' do
+      usr = api_login
+      post :change_password, params:{password: '123456'}
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end  
 end
