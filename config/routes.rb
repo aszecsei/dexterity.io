@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     post '/projects'       => "projects#create"
     
     post '/issues'        => "issues#create"
+    post '/issues/reorder'  => "issues#update"
   end
   #, :format => true, :constraints => { :format => 'json' }
 end

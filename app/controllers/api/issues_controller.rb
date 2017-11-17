@@ -30,19 +30,32 @@ class Api::IssuesController < Api::ApiController
   
   def update
      #finds the issue to be moved
-     issue1 = Issue.find params[:id => object.issue_id]
-     if(object.status_id == issue1.status_id)
-      #finds the issue that first one will live behind
-      issue2 = Issue.find params[:id => object.next_id]
-      #issue3 = issue2.next
-      issue1.append_to(issue2)
-     else
-      #finds the issue that first one will live behind
-      issue2 = Issue.find params[:id => object.next_id]
-      #issue3 = issue2.next
-      issue1.status_id = status_id
-      issue1.append_to(issue2)
+     issue1 = Issue.find_by_id(params[:issue_id])
+     if not issue1
+       render_error(:unprocessable_entity, "Could not find issue")
+       return
      end
+     if(params[:status_id] == issue1.status_id)
+      #finds the issue that first one will live after
+      issue2 = Issue.find_by_id(params[:prev_id])
+      if not issue2
+        issue1.prepend
+        head :no_content
+      else
+        issue1.append_to(issue2)
+        head :no_content
+      end
+     else
+      issue1.status_id = params[:status_id]
+      #finds the issue that first one will live after
+      issue2 = Issue.find_by_id(params[:prev_id])
+      if not issue2
+        issue1.prepend
+        head :no_content
+      else
+        issue1.append_to(issue2)
+        head :no_content
+      end
+    end
   end
-  
 end
