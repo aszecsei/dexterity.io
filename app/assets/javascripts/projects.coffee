@@ -29,6 +29,7 @@ class ProjectsController
         else
           error.insertAfter element
         return
+        
     $("#add").submit (e) ->
       console.log("Boo!")
       url = "/api/projects"
