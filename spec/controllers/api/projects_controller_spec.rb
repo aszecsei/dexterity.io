@@ -16,13 +16,13 @@ RSpec.describe Api::ProjectsController, type: :controller do
     end
     
     it 'should require a name' do
-      usr = api_login
+      api_login
       post :create, params: {description: 'A project'}
       expect(response).to have_http_status(:unprocessable_entity)
     end
     
     it 'should retrieve the appropriate JSON' do
-      usr = api_login
+      api_login
       post :create, params: {name: 'Project', description: 'A project'}
       expect(response.body).to include('Project')
       expect(response.body).to include('A project')
@@ -136,7 +136,7 @@ RSpec.describe Api::ProjectsController, type: :controller do
     end
     
     it 'should require a valid username' do
-      usr = api_login
+      api_login
       proj = FactoryGirl.create(:project)
       FactoryGirl.create(:user, username: 'test1', password: '123456')
       FactoryGirl.create(:role, name:'developer', project_id: proj.id)
@@ -145,7 +145,7 @@ RSpec.describe Api::ProjectsController, type: :controller do
     end
     
     it 'should require a valid role name' do
-      usr = api_login
+      api_login
       proj = FactoryGirl.create(:project)
       FactoryGirl.create(:user, username: 'test1', password: '123456')
       FactoryGirl.create(:role, name:'developer', project_id: proj.id)
@@ -154,7 +154,7 @@ RSpec.describe Api::ProjectsController, type: :controller do
     end
     
     it 'should assign a user to a role' do
-      usr = api_login
+      api_login
       proj = FactoryGirl.create(:project)
       FactoryGirl.create(:user, username: 'test1', password: '123456')
       FactoryGirl.create(:role, name:'developer', project_id: proj.id)
