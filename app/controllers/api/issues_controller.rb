@@ -35,7 +35,7 @@ class Api::IssuesController < Api::ApiController
        render_error(:unprocessable_entity, "Could not find issue")
        return
      end
-     if(params[:status_id] == issue1.status_id)
+     if(params[:status_id] == issue1.status_id.to_s)
       #finds the issue that first one will live after
       issue2 = Issue.find_by_id(params[:prev_id])
       if not issue2
