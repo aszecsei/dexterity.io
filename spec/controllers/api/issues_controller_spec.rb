@@ -3,8 +3,8 @@ require 'spec_helper'
 
 RSpec.describe Api::IssuesController, type: :controller do
   before(:each) do
-    @usr = FactoryGirl.create(:user)
-    @proj = FactoryGirl.create(:project)
+    @usr = FactoryBot.create(:user)
+    @proj = FactoryBot.create(:project)
     @proj.create_owner(@usr)
   end
   
