@@ -3,6 +3,7 @@ Feature: Login Page
   I want to be able to login or create an account
   So that I can access my account
   
+@javascript
 Scenario: User Logs In 
   Given I have registered
   When I go to the login page

@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe SwimlanesController, type: :controller do
         describe 'GET #index' do
             it 'should successfully retrieve the project swimlane' do
-                usr = FactoryGirl.create(:user, token: 'beepboop')
+                usr = FactoryBot.create(:user, token: 'beepboop')
                 session[:token] = 'beepboop'
-                proj = FactoryGirl.create(:project)
+                proj = FactoryBot.create(:project)
                 proj.create_owner(usr)
                 get :index, params: {id: proj.id}
                 expect(assigns(:title))
@@ -15,7 +15,7 @@ RSpec.describe SwimlanesController, type: :controller do
             end
             
             it 'should reject users if not logged in' do
-                proj = FactoryGirl.create(:project)
+                proj = FactoryBot.create(:project)
 
                 get :index, params: {id: proj.id}
                 expect(flash[:error]).to eq('Access denied')
