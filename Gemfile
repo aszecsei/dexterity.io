@@ -54,7 +54,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'teaspoon-mocha'
 end
 

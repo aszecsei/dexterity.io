@@ -15,7 +15,7 @@ RSpec.describe SessionsController, type: :controller do
         end
         
         it 'should detect valid tokens' do
-            FactoryGirl.create(:user, token: 'beepboop')
+            FactoryBot.create(:user, token: 'beepboop')
             post :create, params: {token: 'beepboop'}
             expect(response).to redirect_to root_url
             expect(session[:token]).to eq('beepboop')

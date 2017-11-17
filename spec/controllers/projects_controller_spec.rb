@@ -4,7 +4,7 @@ require 'rails_helper'
 describe ProjectsController do
     describe 'GET #index' do
         it 'should successfully retrieve the index page' do
-            usr = FactoryGirl.create(:user, token: 'beepboop')
+            usr = FactoryBot.create(:user, token: 'beepboop')
             session[:token] = 'beepboop'
             get :index
             expect(response).to render_template :index
