@@ -3,7 +3,7 @@ require 'spec_helper'
 
 RSpec.describe Api::UsersController, type: :controller do
   def api_login()
-    usr = FactoryGirl.create(:user)
+    usr = FactoryBot.create(:user)
     usr.regenerate_token
     request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(usr.token)
     return usr
@@ -11,13 +11,13 @@ RSpec.describe Api::UsersController, type: :controller do
     
   describe 'POST #create' do
     it 'should detect duplicate username' do
-      FactoryGirl.create(:user, username: 'test1')
+      FactoryBot.create(:user, username: 'test1')
       post :create, params: {username: 'test1', email: 'test@gmail.com', password: '123456', displayName: 'test'}
       expect(response).to have_http_status(:unprocessable_entity)
     end
     
     it 'should detect duplicate emails' do
-      FactoryGirl.create(:user, email: 'test@gmail.com')
+      FactoryBot.create(:user, email: 'test@gmail.com')
       post :create, params: {username: 'test1', email: 'test@gmail.com', password: '123456', displayName: 'test'}
       expect(response).to have_http_status(:unprocessable_entity)
     end
