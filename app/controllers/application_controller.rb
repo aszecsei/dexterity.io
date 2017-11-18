@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   def require_login
+      current_user
       authenticate_token || handle_unauthorized
   end
 

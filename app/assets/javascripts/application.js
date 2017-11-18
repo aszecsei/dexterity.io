@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require jquery-ui
 //= require turbolinks
 //= require materialize-sprockets
 //= require jquery.validate
@@ -19,7 +20,7 @@
 //= require dexterityio
 //= require_tree .
 
-$(function() {
+document.addEventListener('turbolinks:load', function() {
   var $body = $("body")
   var controller = $body.data("controller").replace(/\//g, "_");
   var action = $body.data("action");
@@ -35,4 +36,5 @@ $(function() {
       activeController[action]();
     }
   }
+  
 });

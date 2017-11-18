@@ -10,7 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103004412) do
+ActiveRecord::Schema.define(version: 20171115180527) do
+
+  create_table "assignments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "issue_id"
+    t.index ["issue_id"], name: "index_assignments_on_issue_id"
+    t.index ["user_id", "issue_id"], name: "index_assignments_on_user_id_and_issue_id", unique: true
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "blockages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "issue_id"
+    t.integer "blocked_issue_id"
+    t.index ["blocked_issue_id"], name: "index_blockages_on_blocked_issue_id"
+    t.index ["issue_id", "blocked_issue_id"], name: "index_blockages_on_issue_id_and_blocked_issue_id", unique: true
+    t.index ["issue_id"], name: "index_blockages_on_issue_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_categories_on_project_id"
+  end
+
+  create_table "issues", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.integer "status_id", null: false
+    t.integer "category_id", null: false
+    t.integer "project_id", null: false
+    t.integer "created_by_id", null: false
+    t.string "estimated_time"
+    t.integer "story_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "next_id"
+    t.boolean "first"
+    t.index ["category_id"], name: "index_issues_on_category_id"
+    t.index ["created_by_id"], name: "index_issues_on_created_by_id"
+    t.index ["first"], name: "index_issues_on_first"
+    t.index ["next_id"], name: "index_issues_on_next_id"
+    t.index ["project_id"], name: "index_issues_on_project_id"
+    t.index ["status_id"], name: "index_issues_on_status_id"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
@@ -32,6 +82,20 @@ ActiveRecord::Schema.define(version: 20171103004412) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_roles_on_project_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.string "category", default: "To Do", null: false
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "next_id"
+    t.boolean "first"
+    t.index ["first"], name: "index_statuses_on_first"
+    t.index ["next_id"], name: "index_statuses_on_next_id"
+    t.index ["project_id"], name: "index_statuses_on_project_id"
   end
 
   create_table "users", force: :cascade do |t|

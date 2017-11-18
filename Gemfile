@@ -35,6 +35,10 @@ gem 'haml'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'jquery-validation-rails'
+gem 'jquery-ui-rails'
+gem 'chronic_duration'
+# Resort is used for making swimlanes act like a linked list
+gem 'resort', :git => 'https://github.com/aszecsei/resort.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -50,7 +54,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'teaspoon-mocha'
 end
 
@@ -73,5 +77,6 @@ end
 
 group :test do
   gem 'faker'
+  gem 'poltergeist'
   gem 'phantomjs'
 end
