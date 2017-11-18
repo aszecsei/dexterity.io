@@ -4,7 +4,7 @@ require 'rails_helper'
 describe ApplicationController do
   describe 'Authentication' do
     it 'detect the current user' do
-      usr = FactoryGirl.create(:user, token: 'beepboop')
+      usr = FactoryBot.create(:user, token: 'beepboop')
       session[:token] = 'beepboop'
       expect(controller.current_user).to eq(usr)
     end

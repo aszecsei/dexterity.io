@@ -1,7 +1,7 @@
 # spec/factories/users.rb
 require 'faker'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :role do |f|
     f.name { Faker::Name.name }
     f.project_id { Faker::Number.digit }

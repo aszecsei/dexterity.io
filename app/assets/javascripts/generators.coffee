@@ -14,12 +14,20 @@ this.generateProjectCard = (title, description, open, edit, mdelete) ->
     </div>
   </div>
   """
-this.generateIssueCard = (title, description) ->
+this.generateIssueCard = (title, description,category,sp,id) ->
   return """
-  <div class="card">
+  <div class="card" id ="#{id}">
     <div class="card-content grey-text text-darken-4">
       <span class="card-title">#{title}</span>
-      #{description}
+      <p>
+        #{description}
+      </p>
+      <div class="chip">
+        #{category}
+      </div
+      <div class="chip">
+        SP #{sp}
+      </div
     </div>
   </div>
   """

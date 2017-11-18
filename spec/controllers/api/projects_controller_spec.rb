@@ -3,7 +3,7 @@ require 'spec_helper'
 
 RSpec.describe Api::ProjectsController, type: :controller do
   def api_login()
-    usr = FactoryGirl.create(:user)
+    usr = FactoryBot.create(:user)
     usr.regenerate_token
     request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(usr.token)
     return usr

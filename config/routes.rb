@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     post '/addRole'       => "projects#addRole"
     post '/assignedRole'  => "projects#assignedRole"
     post '/issues'        => "issues#create"
+    post '/issues/reorder'  => "issues#update"
   end
   #, :format => true, :constraints => { :format => 'json' }
 end
