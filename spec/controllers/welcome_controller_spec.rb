@@ -8,7 +8,7 @@ describe WelcomeController do
            expect(response).to render_template :index
        end
        it 'should redirect to projects page with token' do
-           FactoryGirl.create(:user, token: 'beepboop')
+           FactoryBot.create(:user, token: 'beepboop')
            controller.session[:token] = 'beepboop'
            get :index
            expect(response).to redirect_to projects_url
