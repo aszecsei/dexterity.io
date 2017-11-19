@@ -1,11 +1,9 @@
 this.app ?= {}
-$ ->
-  $('.modal').modal()
 
-$(document).on "turbolinks:load page:change", ->
+$ ->
   # Do Materialize-related setup
   console.log("Adding modals")
-  
+  $('.modal').modal()
   $('ul.tabs').tabs()
   $('select').material_select()
   $('.parallax').parallax()
