@@ -76,6 +76,7 @@
                     Story Points
                 .errorTxt8
             %input{:type =>"hidden", :name => "project_id",:value => @project.id}
+            %input{:type =>"hidden", :name => "next_id",:value => "-1"}
         .modal-footer
             %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
                 %span.orange-text

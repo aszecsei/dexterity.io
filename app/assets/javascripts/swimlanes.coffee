@@ -3,6 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 class SwimlanesController
     index: ->
+        $('.modal').modal()
+        $('select').material_select()
         $ ->
             $('[id^="swimlane_"]').sortable(
                 items: "> :not(.ui-state-disabled)"
@@ -39,8 +41,7 @@ class SwimlanesController
                 revert: true).disableSelection()
             return
             
-        $('.modal').modal()
-        $('select').material_select()
+
         $( '#add' ).validate
             rules:
                 name:
@@ -57,17 +58,19 @@ class SwimlanesController
             messages:
                 title:
                     minlength: "Enter at least 5 characters"
-        errorElement: 'div'
-        errorPlacement: (error, element) ->
-            placement = $(element).data('error')
-            if placement
-                $(placement).append error
-            else
-                error.insertAfter element
-            return
+            errorElement: 'div'
+            errorPlacement: (error, element) ->
+                placement = $(element).data('error')
+                if placement
+                    $(placement).append error
+                else
+                    error.insertAfter element
+                return
+        
         $("#add").submit (e) ->
           console.log("Boo!")
           url = "/api/issues"
+          console.log $("#add").serialize()
           $.ajax
             type: 'POST'
             headers: {"Authorization": "Token token=" + $("#token").val()}
