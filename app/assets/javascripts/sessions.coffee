@@ -12,7 +12,6 @@ class SessionsController
           required: true
 
     $("#formLogin").submit (e) ->
-      console.log("Boo!")
       url = "/api/login"
       $.ajax
         type: 'POST'

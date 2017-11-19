@@ -22,12 +22,12 @@
                                             
                 
     .fixed-action-btn{:style => "bottom: 50px; right: 19px;"}
-        %a.btn-floating.btn-large.modal-trigger{:href =>"#addModal"}
+        %button.btn-floating.btn-large.modal-trigger{"data-turbolinks" => 'false', "data-target" => 'swimlaneModal'}
             %i.material-icons 
                 add
                 
 = form_tag '#', id: "add" do 
-    .modal#addModal
+    .modal#swimlaneModal
         .modal-content
             %h4.center
                 Add New Issue
