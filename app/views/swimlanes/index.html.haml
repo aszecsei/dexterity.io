@@ -7,7 +7,7 @@
                     %h5
                         =status.name
                 %ul.connectedSortable{:id => "swimlane_" + status.id.to_s}
-                    -status.issues.each do |issue|
+                    -status.issues.ordered.each do |issue|
                         %li.ui-state-default
                             .card{:id => issue.id}
                                 .card-content.grey-text.text-darken-4
