@@ -19,11 +19,11 @@ Rails.application.routes.draw do
     
     post '/projects'      => "projects#create"
     post '/adduser'       => "projects#addUser"
-    post '/edit'          => "projects#edit"
+    put  '/project/:id'   => "projects#edit"
+    delete '/project/:id' => "projects#destroy"
     post '/addRole'       => "projects#addRole"
     post '/assignedRole'  => "projects#assignedRole"
     post '/issues'        => "issues#create"
     post '/issues/reorder'  => "issues#update"
   end
-  #, :format => true, :constraints => { :format => 'json' }
 end
