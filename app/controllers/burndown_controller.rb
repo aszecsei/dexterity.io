@@ -1,0 +1,2 @@
+class BurndownController < ApplicationController
+end
