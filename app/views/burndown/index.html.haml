@@ -1,6 +1,6 @@
 = render :partial => "shared/sidenav"
 %main.container
-  %canvas#myChart{width => 400, height => 400}
+  %canvas#myChart{:width => 400, :height => 400}
 
 :javascript
   var ctx = document.getElementById("myChart").getContext('2d');
