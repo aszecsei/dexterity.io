@@ -40,7 +40,7 @@
             %li
                 %a.subheader Burndown
             %li
-                %a{:href => "#!"} View Chart
+                %a{:href => "/projects/#{@project.id}/burndown"} View Chart
         
     :coffeescript
         $(document).on 'turbolinks:load', ->
