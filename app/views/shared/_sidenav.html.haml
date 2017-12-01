@@ -14,28 +14,34 @@
                     %span.white-text.email
                         = @current_user.email
         %li
-            %a.subheader Projects
+            %a.subheader{:href => "/projects"} Projects
         %li
-            %a{:href => '#!'} First Project
-        %li
-            %a{:href => '#!'} Second Project
-        %li
-            %div.divider
-        %li
-            %a.subheader My Issues
-        %li
-            %a{:href => "#!"} First Issue
-        %li
-            %a{:href => "#!"} Second Issue
-        %li
-            %a{:href => "#!"} Third Issue
+            %a{:href => "/projects"}
+                %i.small.material-icons 
+                    arrow_back 
+                Projects
+        -@current_user.projects.each do |proj|
+            %li
+                %a{:href => "/projects/#{proj.id}"}
+                    =proj.name
         %li
             %div.divider
-        %li
-            %a.subheader Burndown
-        %li
-            %a{:href => "#!"} View Chart
-    
+        -if defined? @project
+            %li
+                %a.subheader My Issues
+            %li
+                %a{:href => "#!"} First Issue
+            %li
+                %a{:href => "#!"} Second Issue
+            %li
+                %a{:href => "#!"} Third Issue
+            %li
+                %div.divider
+            %li
+                %a.subheader Burndown
+            %li
+                %a{:href => "#!"} View Chart
+        
     :coffeescript
         $(document).on 'turbolinks:load', ->
             $('.button-collapse').sideNav()
