@@ -28,13 +28,11 @@
             %div.divider
         -if defined? @project
             %li
-                %a.subheader My Issues
-            %li
-                %a{:href => "#!"} First Issue
-            %li
-                %a{:href => "#!"} Second Issue
-            %li
-                %a{:href => "#!"} Third Issue
+                %a.subheader Recent Issues
+            -@project.issues.order('updated_at DESC').first(5).each do |issue|
+                %li
+                    %a{:href => "#!"}
+                        = issue.name
             %li
                 %div.divider
             %li
