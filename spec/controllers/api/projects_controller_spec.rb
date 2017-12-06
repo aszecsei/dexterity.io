@@ -75,7 +75,7 @@ RSpec.describe Api::ProjectsController, type: :controller do
   describe 'POST #edit' do
     it 'should require the user to be logged in' do
       proj = FactoryBot.create(:project)
-      post :addUser, params: {id: proj.id, name: 'second', description: 'from old project'}
+      post :edit, params: {id: proj.id, name: 'second', description: 'from old project'}
       expect(response).to have_http_status(:unauthorized)
     end
     it 'should require a project name and project description' do
@@ -179,6 +179,21 @@ RSpec.describe Api::ProjectsController, type: :controller do
       FactoryBot.create(:role, name:'developer', project_id: proj.id)
       delete :destroy, params: {id: proj.id}
       expect(response).to have_http_status(:no_content)
+    end
+  end
+  
+  describe 'POST #get' do
+    it 'should require the user to be logged in' do
+      proj = FactoryBot.create(:project)
+      post :get, params: {id: proj.id}
+      expect(response).to have_http_status(:unauthorized)
+    end
+    
+    it 'should return the project name and description' do
+      api_login
+      proj = FactoryBot.create(:project)
+      post :get, params: {id: proj.id}
+      expect(response).to have_http_status(:ok)
     end
   end
 end
