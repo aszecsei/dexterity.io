@@ -73,7 +73,7 @@ class Api::ProjectsController < Api::ApiController
     end
   end
   
-  def get
+  def getProject
     id = params[:id]
     proj = Project.find(id)
     if proj.nil?
