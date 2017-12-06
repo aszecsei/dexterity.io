@@ -2,15 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 class ProjectsController
-  show: ->
-    $(document).on 'turbolinks:load', ->
-      $('ul.tabs').tabs()
-      return
-    return
-
   index: ->
     # $("#projects-row").append(generateProjectCard("Dynamic Project #{num}", "<p>Description for project #{num}</p><p>Last worked on: Never.</p>", "#", "#", "#")) for num in [1..10]
-    $('.modal').modal()
     $( '#add' ).validate
       rules:
         title:

@@ -7,7 +7,7 @@
                     %h5
                         =status.name
                 %ul.connectedSortable{:id => "swimlane_" + status.id.to_s}
-                    -status.issues.each do |issue|
+                    -status.issues.ordered.each do |issue|
                         %li.ui-state-default
                             .card{:id => issue.id}
                                 .card-content.grey-text.text-darken-4
@@ -22,12 +22,12 @@
                                             
                 
     .fixed-action-btn{:style => "bottom: 50px; right: 19px;"}
-        %a.btn-floating.btn-large.modal-trigger{:href =>"#addModal"}
+        %button.btn-floating.btn-large.modal-trigger{"data-turbolinks" => 'false', "data-target" => 'swimlaneModal'}
             %i.material-icons 
                 add
                 
 = form_tag '#', id: "add" do 
-    .modal#addModal
+    .modal#swimlaneModal
         .modal-content
             %h4.center
                 Add New Issue
@@ -76,6 +76,7 @@
                     Story Points
                 .errorTxt8
             %input{:type =>"hidden", :name => "project_id",:value => @project.id}
+            %input{:type =>"hidden", :name => "next_id",:value => "-1"}
         .modal-footer
             %button.waves-effect.waves-teal.btn-flat{:type =>"submit",:name=>"action"}
                 %span.orange-text
