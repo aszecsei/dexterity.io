@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     delete "/delete"      => "users#destroy"
     post "/password"      =>"users#change_password"
     
+    post '/get'           => "projects#get"
     post '/projects'      => "projects#create"
     post '/adduser'       => "projects#addUser"
     put  '/project/:id'   => "projects#edit"

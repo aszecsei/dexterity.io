@@ -73,4 +73,14 @@ class Api::ProjectsController < Api::ApiController
     end
   end
   
+  def get
+    id = params[:id]
+    proj = Project.find(id)
+    if proj.nil?
+      render_error(:unprocessable_entity, "Project does not exist")
+    else
+      render json: {:name => proj.name, :description => proj.description}
+    end
+  end
+  
 end
