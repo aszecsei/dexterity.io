@@ -31,7 +31,8 @@ class Api::ProjectsController < Api::ApiController
     id = params[:id] # retrieve project ID from URI route
     proj = Project.find(id)
     if proj.edit(params[:name], params[:description])
-      head :no_content
+      #head :no_content
+      render json: {:name => proj.name, :description => proj.description}
     else
       render_error(:unprocessable_entity, "Failed to edit project")
     end
@@ -58,6 +59,17 @@ class Api::ProjectsController < Api::ApiController
       head :no_content
     else
       render_error(:unprocessable_entity, "Failed to assign a role")
+    end
+  end
+  
+  def destroy
+    id = params[:id]
+    proj = Project.find(id)
+    if proj.nil?
+      render_error(:unprocessable_entity, "Project does not exist")
+    else
+      proj.destroy
+      head :no_content
     end
   end
   

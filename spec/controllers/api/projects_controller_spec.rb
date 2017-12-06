@@ -106,7 +106,7 @@ RSpec.describe Api::ProjectsController, type: :controller do
       proj = FactoryBot.create(:project)
       proj.create_owner(usr)
       post :edit, params: {id: proj.id, name: 'second', description: 'from old project'}
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:ok)
     end
   end
   
@@ -159,6 +159,25 @@ RSpec.describe Api::ProjectsController, type: :controller do
       FactoryBot.create(:user, username: 'test1', password: '123456')
       FactoryBot.create(:role, name:'developer', project_id: proj.id)
       post :assignedRole, params: {id: proj.id, username:'test1', rolename:'developer'}
+      expect(response).to have_http_status(:no_content)
+    end
+  end
+  
+  describe 'Delete #destroy' do
+    it 'should require the user to be logged in' do
+      proj = FactoryBot.create(:project)
+      FactoryBot.create(:user, username: 'test1', password: '123456')
+      FactoryBot.create(:role, name:'developer', project_id: proj.id)
+      delete :destroy, params: {id: proj.id}
+      expect(response).to have_http_status(:unauthorized)
+    end
+    
+    it 'should delete the project from database' do
+      api_login
+      proj = FactoryBot.create(:project)
+      FactoryBot.create(:user, username: 'test1', password: '123456')
+      FactoryBot.create(:role, name:'developer', project_id: proj.id)
+      delete :destroy, params: {id: proj.id}
       expect(response).to have_http_status(:no_content)
     end
   end
