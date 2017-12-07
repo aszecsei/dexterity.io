@@ -23,7 +23,8 @@ class ProjectsController
         else
           error.insertAfter element
         return
-    $("#editbut").click (e) ->
+        
+    $(".editbtn").click (e) ->
       active = $(this).attr("data")
       $("#editModal").modal('open');
       url = "/api/project/"+active
@@ -49,15 +50,10 @@ class ProjectsController
       e.preventDefault()
       return
       
+    $(".deletebtn").click (e)->
+      active = $(this).attr("data")
+      return
       
-    $("#deletebut").click (e) ->
-      console.log(active)
-      active = $(this).attr("data")
-      console.log(active)
-      return
-    $("#editbut").click (e)->
-      active = $(this).attr("data")
-      return
     $("#delete").submit (e) ->
       console.log("Boo!")
       url = "/api/project/"+active
@@ -124,6 +120,7 @@ class ProjectsController
           return
       e.preventDefault()
       return
+  
     return
     
 
