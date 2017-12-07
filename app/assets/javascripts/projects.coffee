@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 class ProjectsController
   index: ->
+    active = null
     # $("#projects-row").append(generateProjectCard("Dynamic Project #{num}", "<p>Description for project #{num}</p><p>Last worked on: Never.</p>", "#", "#", "#")) for num in [1..10]
     $( '#add' ).validate
       rules:
@@ -22,7 +23,59 @@ class ProjectsController
         else
           error.insertAfter element
         return
-        
+    $("#editbut").click (e) ->
+      active = $(this).attr("data")
+      
+      url = "/api/project/"+active
+      $.ajax
+        type: 'GET'
+        headers: {"Authorization": "Token token=" + $("#token").val()}
+        url: url
+        success: (data) ->
+          thisdata = data
+          return
+        error: (req, msg, stat) ->
+          console.log(req)
+          response = JSON.parse(req.responseText)
+          errorsArr = (msg.detail for msg in response.errors)
+          errorsHTML = errorsArr.join("\n")
+          alert(errorsHTML)
+          # $("#errorMsg").html(errorsHTML)
+          return
+      e.preventDefault()
+      return
+      
+      
+    $("#deletebut").click (e) ->
+      console.log(active)
+      active = $(this).attr("data")
+      console.log(active)
+    $("#editbut").click (e)->
+      active = $(this).attr("data")
+      
+    $("#delete").submit (e) ->
+      console.log("Boo!")
+      url = "/api/project/"+active
+      $.ajax
+        type: 'DELETE'
+        headers: {"Authorization": "Token token=" + $("#token").val()}
+        url: url
+        data: active
+        success: (data) ->
+          location.reload();
+          return
+        error: (req, msg, stat) ->
+          console.log(req)
+          response = JSON.parse(req.responseText)
+          errorsArr = (msg.detail for msg in response.errors)
+          errorsHTML = errorsArr.join("\n")
+          alert(errorsHTML)
+          # $("#errorMsg").html(errorsHTML)
+          return
+      e.preventDefault()
+      return
+    return
+
     $("#add").submit (e) ->
       console.log("Boo!")
       url = "/api/projects"
@@ -44,8 +97,8 @@ class ProjectsController
           # $("#errorMsg").html(errorsHTML)
           return
       e.preventDefault()
-      
       return
     return
+    
 
 this.app.projects = new ProjectsController
