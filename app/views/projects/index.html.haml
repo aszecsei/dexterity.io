@@ -62,12 +62,12 @@
             %h4 
                 Edit 
             .input-field
-                %input{:type =>"text",:id => "name",:name => "name","data-error"=>".errorTxt1", :required =>""}
+                %input{:type =>"text",:id => "editname",:name => "name","data-error"=>".errorTxt1", :required =>""}
                 %label{:for=>"title"}
                     Title 
                 .errorTxt1
             .input-field
-                %textarea.materialize-textarea{:id => "description", :name => "description", "data-error"=>".errorTxt2"}
+                %textarea.materialize-textarea{:id => "description",:id => "editdescription", :name => "description", "data-error"=>".errorTxt2"}
                 %label{:for=>"description"}
                     Description
                 .errorTxt2

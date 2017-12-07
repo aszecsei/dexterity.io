@@ -25,14 +25,16 @@ class ProjectsController
         return
     $("#editbut").click (e) ->
       active = $(this).attr("data")
-      
+      $("#editModal").modal('open');
       url = "/api/project/"+active
       $.ajax
         type: 'GET'
         headers: {"Authorization": "Token token=" + $("#token").val()}
         url: url
         success: (data) ->
-          thisdata = data
+          $("#editname").attr("value",data.name)
+          $("#editdescription").attr("value",data.description)
+          Materialize.updateTextFields();
           return
         error: (req, msg, stat) ->
           console.log(req)
