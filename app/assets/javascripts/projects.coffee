@@ -33,7 +33,9 @@ class ProjectsController
         url: url
         success: (data) ->
           $("#editname").attr("value",data.name)
-          $("#editdescription").attr("value",data.description)
+          $("#editdescription").val(data.description)
+          $('#textarea1').trigger('autoresize');
+          console.log(data)
           Materialize.updateTextFields();
           return
         error: (req, msg, stat) ->
@@ -52,9 +54,10 @@ class ProjectsController
       console.log(active)
       active = $(this).attr("data")
       console.log(active)
+      return
     $("#editbut").click (e)->
       active = $(this).attr("data")
-      
+      return
     $("#delete").submit (e) ->
       console.log("Boo!")
       url = "/api/project/"+active
@@ -76,7 +79,28 @@ class ProjectsController
           return
       e.preventDefault()
       return
-    return
+      
+    $("#edit").submit (e) ->
+      console.log("Boo!")
+      url = "/api/project/"+active
+      $.ajax
+        type: 'PUT'
+        headers: {"Authorization": "Token token=" + $("#token").val()}
+        url: url
+        data: $("#edit").serialize()
+        success: (data) ->
+          location.reload();
+          return
+        error: (req, msg, stat) ->
+          console.log(req)
+          response = JSON.parse(req.responseText)
+          errorsArr = (msg.detail for msg in response.errors)
+          errorsHTML = errorsArr.join("\n")
+          alert(errorsHTML)
+          # $("#errorMsg").html(errorsHTML)
+          return
+      e.preventDefault()
+      return
 
     $("#add").submit (e) ->
       console.log("Boo!")
