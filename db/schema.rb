@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(version: 20171115180527) do
     t.string "displayName"
     t.string "password_digest"
     t.string "token"
+    t.string "provider"
+    t.string "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

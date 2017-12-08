@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get  '/register'  => 'users#new'
   get '/projects/:id' => 'swimlanes#index'
   
+  get 'auth/:provider/callback', to: "sessions#ocreate"
+  delete 'sign_out', to: "sessions#destroy", as: 'sign_out'
 
   namespace :api do
     post   "/login"       => "sessions#create"

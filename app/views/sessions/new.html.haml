@@ -28,6 +28,10 @@
                                 %button.waves-effect.waves-teal.btn-flat#register-button
                                     %span.orange-text
                                         Register
+                            %a{:href => "/auth/github"}
+                            %button.waves-effect.waves-teal.btn-flat#github-button
+                                %span.orange-text
+                                    github
         = form_tag login_path, id: "formSession" do
             = hidden_field_tag 'token', ''
                 
