@@ -22,7 +22,7 @@
                                             
                 
     .fixed-action-btn{:style => "bottom: 50px; right: 19px;"}
-        %button.btn-floating.btn-large.modal-trigger{"data-turbolinks" => 'false', "data-target" => 'swimlaneModal'}
+        %button.btn-floating.btn-large.modal-trigger{"data-turbolinks" => 'false', "data-target" => 'swimlaneModal',:onclick =>"Materialize.updateTextFields();"}
             %i.material-icons 
                 add
                 

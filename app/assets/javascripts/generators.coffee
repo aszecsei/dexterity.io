@@ -1,4 +1,4 @@
-this.generateProjectCard = (title, description, open, edit, mdelete) ->
+this.generateProjectCard = (title, description, open, edit, mdelete,id) ->
   return """
   <div class="col m12 l6">
     <div class="card small">
@@ -8,12 +8,14 @@ this.generateProjectCard = (title, description, open, edit, mdelete) ->
       </div>
       <div class="card-action">
         <a href="#{open}">Open</a>
-        <a href="#{edit}", data-turbolinks="false">Edit</a>
-        <a href="#{mdelete}", data-turbolinks="false">Delete</a>
+        <a class="editbtn modal-trigger" data-turbolinks="false" data="#{id}" href="#{edit}">Edit</a>
+        <a class="deletebtn modal-trigger" data-turbolinks="false" data="#{id}" href="#{mdelete}">Delete</a>
       </div>
     </div>
   </div>
   """
+  
+  
 this.generateIssueCard = (title, description,category,sp,id) ->
   return """
   <div class="card" id ="#{id}">
