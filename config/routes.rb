@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/login'     => 'sessions#create'
   get  '/register'  => 'users#new'
   get '/projects/:id' => 'swimlanes#index'
+  get '/projects/:id/burndown' => 'burndown#index'
   
   get 'auth/:provider/callback', to: "sessions#ocreate"
   delete 'sign_out', to: "sessions#destroy", as: 'sign_out'
