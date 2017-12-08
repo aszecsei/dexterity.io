@@ -7,3 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 User.create(username: 'admin', email: 'admin@dexterity.io', password: 'admin', displayName: 'Admin')
+User.create(username: 'haoyoung', email: 'test@dexterity.io', password: 'haoyoung', displayName: 'haoyoung')

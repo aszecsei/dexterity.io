@@ -10,6 +10,16 @@ class Api::SessionsController < Api::ApiController
             render_unauthorized("Invalid username or password")
         end
     end
+    
+    def ocreate
+        auth = request.env["omniauth.auth"]         # response from callback
+        session[:omniauth] = auth.except('extra')
+        user= User.sign_in_from_omniauth(auth)
+        session[:user_id] = user.id
+        user.regenerate_token
+        #request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(user.token)
+        render json: {:token => user.token}
+    end
 
     def destroy
         if current_user.nil?
