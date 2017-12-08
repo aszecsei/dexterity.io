@@ -107,7 +107,7 @@ class ProjectsController
         url: url
         data: $("#add").serialize()
         success: (data) ->
-          $("#projects-row").append(generateProjectCard(data.name, data.description, "/projects/#{data.id}", "#", "#"))
+          $("#projects-row").append(generateProjectCard(data.name, data.description, "/projects/#{data.id}", "#editModal", "#deleteModal",data.id))
           $("#addModal").modal('close');
           return
         error: (req, msg, stat) ->
