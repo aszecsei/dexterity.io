@@ -29,5 +29,6 @@ Rails.application.routes.draw do
     
     post '/issues'        => "issues#create"
     post '/issues/reorder'  => "issues#update"
+    get   '/issues/:id/activity'  => "issues#activitylog"
   end
 end

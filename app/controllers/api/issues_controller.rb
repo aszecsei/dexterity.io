@@ -29,13 +29,13 @@ class Api::IssuesController < Api::ApiController
   end
   
   def update
-     #finds the issue to be moved
-     issue1 = Issue.find_by_id(params[:issue_id])
-     if not issue1
-       render_error(:unprocessable_entity, "Could not find issue")
-       return
-     end
-     if(params[:status_id] == issue1.status_id.to_s)
+    #finds the issue to be moved
+    issue1 = Issue.find_by_id(params[:issue_id])
+    if not issue1
+      render_error(:unprocessable_entity, "Could not find issue")
+      return
+    end
+    if(params[:status_id] == issue1.status_id.to_s)
       #finds the issue that first one will live after
       issue2 = Issue.find_by_id(params[:prev_id])
       if not issue2
@@ -45,7 +45,11 @@ class Api::IssuesController < Api::ApiController
         issue1.append_to(issue2)
         head :no_content
       end
-     else
+    else
+      newStatus = Status.find_by_id(params[:status_id])
+      newlog = Activitylog.create({:activity_type => newStatus.category, :description => "updated the issue status", :user_id => current_user.id})
+      issue1.activitylogs << newlog
+      
       issue1.status_id = params[:status_id]
       #finds the issue that first one will live after
       issue2 = Issue.find_by_id(params[:prev_id])
@@ -57,5 +61,24 @@ class Api::IssuesController < Api::ApiController
         head :no_content
       end
     end
+  end
+  
+  def activitylog
+    issue = Issue.find_by_id(params[:id])
+    render json: {
+        :id => issue.id,
+        :name => issue.name,
+        :description => issue.description,
+        :project_id => issue.project_id,
+        :status_id => issue.status_id,
+        :category_id => issue.category_id,
+        :estimated_time => issue.estimated_time_string,
+        :story_points => issue.story_points,
+        :log => issue.activitylogs.map {|log| {
+          :type => log.activity_type,
+          :desc => log.description,
+          :user_disp => log.user.displayName
+        }}
+      }
   end
 end
