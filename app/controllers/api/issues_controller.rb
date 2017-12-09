@@ -51,7 +51,9 @@ class Api::IssuesController < Api::ApiController
       issue1.activitylogs << newlog
       
       issue1.status_id = params[:status_id]
-      if params[:prev_id] == "-1"
+      #finds the issue that first one will live after		+      if params[:prev_id] == "-1"
+      issue2 = Issue.find_by_id(params[:prev_id])		
+      if not issue2
         issue1.prepend
         head :no_content
       else
