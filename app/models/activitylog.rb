@@ -3,14 +3,14 @@ class Activitylog < ApplicationRecord
   belongs_to :user
   
   def isIssueStartWork
-    return (type == "In Progress")
+    return (activity_type == "In Progress")
   end
   
   def isIssueClose
-    return (type == "Done")
+    return (activity_type == "Done")
   end
   
   def isIssueOpen
-    return (type == "To Do")
+    return (activity_type == "To Do")
   end
 end

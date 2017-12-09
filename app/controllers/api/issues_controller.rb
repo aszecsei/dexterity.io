@@ -51,12 +51,12 @@ class Api::IssuesController < Api::ApiController
       issue1.activitylogs << newlog
       
       issue1.status_id = params[:status_id]
-      #finds the issue that first one will live after
-      issue2 = Issue.find_by_id(params[:prev_id])
-      if not issue2
+      if params[:prev_id] == "-1"
         issue1.prepend
         head :no_content
       else
+        #finds the issue that first one will live after
+        issue2 = Issue.find_by_id(params[:prev_id])
         issue1.append_to(issue2)
         head :no_content
       end

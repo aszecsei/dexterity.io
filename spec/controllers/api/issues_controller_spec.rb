@@ -87,7 +87,7 @@ RSpec.describe Api::IssuesController, type: :controller do
             post :update, params: {
               prev_id: @id2,
               issue_id: @id1,
-              status_id: 0
+              status_id: @proj.statuses[1].id
             }
           end
           it "should return no_content" do
@@ -124,7 +124,7 @@ RSpec.describe Api::IssuesController, type: :controller do
             post :update, params: {
               prev_id: -1,
               issue_id: @id2,
-              status_id: 0
+              status_id: @proj.statuses[1].id
             }
           end
           it "should return no_content" do
@@ -312,7 +312,7 @@ RSpec.describe Api::IssuesController, type: :controller do
             post :update, params: {
               prev_id: @id2,
               issue_id: @id1,
-              status_id: 0
+              status_id: @proj.statuses[1].id
             }
           end
           it "should return no_content" do
