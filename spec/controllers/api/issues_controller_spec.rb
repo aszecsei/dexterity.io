@@ -68,7 +68,7 @@ RSpec.describe Api::IssuesController, type: :controller do
               name: 'Issue 1',
               description: 'A problem',
               project_id: @proj.id,
-              status_id: @proj.statuses[0].id,
+              status_id: @proj.statuses[1].id,
               category_id: @proj.categories[0].id,
               estimated_time: "1h 30m",
               story_points: 3
@@ -105,7 +105,7 @@ RSpec.describe Api::IssuesController, type: :controller do
               name: 'Issue 1',
               description: 'A problem',
               project_id: @proj.id,
-              status_id: @proj.statuses[0].id,
+              status_id: @proj.statuses[1].id,
               category_id: @proj.categories[0].id,
               estimated_time: "1h 30m",
               story_points: 3
@@ -131,7 +131,7 @@ RSpec.describe Api::IssuesController, type: :controller do
             expect(response).to have_http_status(:no_content)
           end
           it "should make issue2 first" do
-            expect(Issue.find_by_id(@id2).next).to eq(Issue.find_by_id(@id1))
+            expect(Issue.find_by_id(@id2).first).to be_truthy
           end
         end
         
@@ -244,7 +244,7 @@ RSpec.describe Api::IssuesController, type: :controller do
             expect(response).to have_http_status(:no_content)
           end
           it "should make issue2 first" do
-            expect(Issue.find_by_id(@id2).next).to eq(Issue.find_by_id(@id1))
+            expect(Issue.find_by_id(@id2).first).to be_truthy
           end
         end
         
