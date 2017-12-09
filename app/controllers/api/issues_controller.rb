@@ -57,8 +57,6 @@ class Api::IssuesController < Api::ApiController
         issue1.prepend
         head :no_content
       else
-        #finds the issue that first one will live after
-        issue2 = Issue.find_by_id(params[:prev_id])
         issue1.append_to(issue2)
         head :no_content
       end
