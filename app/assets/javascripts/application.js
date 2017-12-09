@@ -15,6 +15,8 @@
 //= require jquery-ui
 //= require materialize-sprockets
 //= require jquery.validate
+//= require Chart.min
+
 //= require generators
 //= require dexterityio
 //= require_tree .

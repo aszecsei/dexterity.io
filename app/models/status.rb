@@ -13,5 +13,4 @@ class Status < ApplicationRecord
   def siblings
     self.project.statuses
   end
-  
 end

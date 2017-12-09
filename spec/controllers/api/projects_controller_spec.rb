@@ -31,8 +31,8 @@ RSpec.describe Api::ProjectsController, type: :controller do
   
   describe 'POST #addUser' do
     it 'should require the user to be logged in' do
-      FactoryBot.create(:user, username: 'test1', password: '123456')
-      post :addUser, params: {username: 'test1', rolename:'developer'}
+      proj = FactoryBot.create(:project)
+      post :addUser, params: {id: proj.id, username: 'test1', rolename:'developer'}
       expect(response).to have_http_status(:unauthorized)
     end
     
@@ -72,24 +72,24 @@ RSpec.describe Api::ProjectsController, type: :controller do
     end
   end
   
-  describe 'POST #edit' do
+  describe 'PUT #edit' do
     it 'should require the user to be logged in' do
       proj = FactoryBot.create(:project)
-      post :addUser, params: {id: proj.id, name: 'second', description: 'from old project'}
+      put :edit, params: {id: proj.id, name: 'second', description: 'from old project'}
       expect(response).to have_http_status(:unauthorized)
     end
     it 'should require a project name and project description' do
       usr = api_login
       proj = FactoryBot.create(:project)
       proj.create_owner(usr)
-      post :edit, params: {id: proj.id}
+      put :edit, params: {id: proj.id}
       expect(response).to have_http_status(:unprocessable_entity)
     end
     it 'should require a project name' do
       usr = api_login
       proj = FactoryBot.create(:project)
       proj.create_owner(usr)
-      post :edit, params: {id: proj.id, description: 'from old project'}
+      put :edit, params: {id: proj.id, description: 'from old project'}
       expect(response).to have_http_status(:unprocessable_entity)
     end
     
@@ -97,7 +97,7 @@ RSpec.describe Api::ProjectsController, type: :controller do
       usr = api_login
       proj = FactoryBot.create(:project)
       proj.create_owner(usr)
-      post :edit, params: {id: proj.id, name: 'second'}
+      put :edit, params: {id: proj.id, name: 'second'}
       expect(response).to have_http_status(:unprocessable_entity)
     end
     
@@ -105,8 +105,8 @@ RSpec.describe Api::ProjectsController, type: :controller do
       usr = api_login
       proj = FactoryBot.create(:project)
       proj.create_owner(usr)
-      post :edit, params: {id: proj.id, name: 'second', description: 'from old project'}
-      expect(response).to have_http_status(:no_content)
+      put :edit, params: {id: proj.id, name: 'second', description: 'from old project'}
+      expect(response).to have_http_status(:ok)
     end
   end
   
@@ -160,6 +160,40 @@ RSpec.describe Api::ProjectsController, type: :controller do
       FactoryBot.create(:role, name:'developer', project_id: proj.id)
       post :assignedRole, params: {id: proj.id, username:'test1', rolename:'developer'}
       expect(response).to have_http_status(:no_content)
+    end
+  end
+  
+  describe 'Delete #destroy' do
+    it 'should require the user to be logged in' do
+      proj = FactoryBot.create(:project)
+      FactoryBot.create(:user, username: 'test1', password: '123456')
+      FactoryBot.create(:role, name:'developer', project_id: proj.id)
+      delete :destroy, params: {id: proj.id}
+      expect(response).to have_http_status(:unauthorized)
+    end
+    
+    it 'should delete the project from database' do
+      api_login
+      proj = FactoryBot.create(:project)
+      FactoryBot.create(:user, username: 'test1', password: '123456')
+      FactoryBot.create(:role, name:'developer', project_id: proj.id)
+      delete :destroy, params: {id: proj.id}
+      expect(response).to have_http_status(:no_content)
+    end
+  end
+  
+  describe 'Get #get' do
+    it 'should require the user to be logged in' do
+      proj = FactoryBot.create(:project)
+      get :getProject, params: {id: proj.id}
+      expect(response).to have_http_status(:unauthorized)
+    end
+    
+    it 'should return the project name and description' do
+      api_login
+      proj = FactoryBot.create(:project)
+      get :getProject, params: {id: proj.id}
+      expect(response).to have_http_status(:ok)
     end
   end
 end

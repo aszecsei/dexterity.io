@@ -36,9 +36,7 @@ class SwimlanesController
                 return
             connectWith: '.connectedSortable'
             revert: true).disableSelection()
-        return
-            
-
+        
         $( '#add' ).validate
             rules:
                 name:
@@ -63,7 +61,7 @@ class SwimlanesController
                 else
                     error.insertAfter element
                 return
-        
+                
         $("#add").submit (e) ->
           url = "/api/issues"
           console.log $("#add").serialize()
@@ -75,7 +73,7 @@ class SwimlanesController
             success: (data) ->
               #$("#projects-row").append(generateProjectCard(data.name, data.description, '#', '#', '#'))
               $("#swimlane_" + data.status_id).append($("<li class = 'ui-state-default'>").append(generateIssueCard(data.name,data.description,data.category,data.story_points,data.id)))
-              $("#addModal").modal('close');
+              $("#swimlaneModal").modal('close');
               return
             error: (req, msg, stat) ->
               console.log(req)
@@ -86,7 +84,31 @@ class SwimlanesController
               # $("#errorMsg").html(errorsHTML)
               return
           e.preventDefault()
-          
           return
+        
+        $(".openbtn").click (e) ->
+            active = $(this).attr("data")
+            e.preventDefault()
+            $.ajax
+                type: 'GET'
+                headers: {"Authorization": "Token token=" + $("#token").val()}
+                url: "/api/issues/#{active}/activity"
+                success: (data) ->
+                    $("#issueName").text(data.name)
+                    $("#issueDesc").text(data.description)
+                    actList = ""
+                    for l, i in data.log
+                        do (l, i)->
+                            actList += "<div class='activityItem'>#{l.user_disp} #{l.desc}<br/>#{l.type}</div>"
+                    $("#activityList").html(actList)
+                    $("#issueModel").modal('open')
+                    return
+                error: (req, msg, stat) ->
+                    response = JSON.parse(req.responseText)
+                    errorsArr = (msg.detail for msg in response.errors)
+                    errorsHTML = errorsArr.join("\n")
+                    alert(errorsHTML)
+                    return
+            return
         return
 this.app.swimlanes = new SwimlanesController

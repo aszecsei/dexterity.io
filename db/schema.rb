@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115180527) do
+ActiveRecord::Schema.define(version: 20171209024706) do
+
+  create_table "activitylogs", force: :cascade do |t|
+    t.string "activity_type"
+    t.string "description"
+    t.integer "issue_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issue_id"], name: "index_activitylogs_on_issue_id"
+    t.index ["user_id"], name: "index_activitylogs_on_user_id"
+  end
 
   create_table "assignments", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -106,6 +117,10 @@ ActiveRecord::Schema.define(version: 20171115180527) do
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "github", default: false
+    t.string "github_username"
+    t.string "provider"
+    t.string "uid"
   end
 
   create_table "workingons", force: :cascade do |t|

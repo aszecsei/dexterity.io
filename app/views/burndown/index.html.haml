@@ -1,0 +1,26 @@
+= render :partial => "shared/sidenav"
+%main.container
+  %canvas#myChart{:width => 400, :height => 400}
+
+:javascript
+  var ctx = document.getElementById("myChart").getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: #{raw @dates},
+      datasets: [{
+        label: '# of issues',
+        data: #{raw @data},
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          },
+          stacked: true
+        }]
+      }
+    }
+  });
