@@ -19,6 +19,10 @@
                                             =issue.category.name
                                         .chip
                                             SP: #{issue.story_points}
+                                .card-action
+                                    %a.openbtn.btn-flat{:href => "#", :data => "#{issue.id}"} Open
+                                    %a.editbtn.modal-trigger.btn-flat.disabled{:href => "#", :data => "#{issue.id}", :disabled => true} Edit
+                                    %a.deletebtn.modal-trigger.btn-flat.disabled{:href => "#deleteModal",:data => "#{issue.id}", :disabled => true} Delete
                                             
                 
     .fixed-action-btn{:style => "bottom: 50px; right: 19px;"}
@@ -82,3 +86,15 @@
                 %span.orange-text
                     Submit
     = hidden_field_tag 'token', @current_user.token
+    
+.modal#issueModel
+    .modal-content
+        %h4.center#issueName
+            Issue Name
+        %h5#issueDesc
+            Issue Description
+        #activityList
+            .activityItem
+                Activity Item 1
+            .activityItem
+                Activity Item 2

@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20171209024706) do
 
   create_table "activitylogs", force: :cascade do |t|
-    t.string "type"
+    t.string "activity_type"
     t.string "description"
     t.integer "issue_id"
     t.integer "user_id"
